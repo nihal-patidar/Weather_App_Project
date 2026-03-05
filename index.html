@@ -1,16 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Nihal Patidar" >
-    <meta name="desc" content="This is a simple and intuitive weather application for Regional forcasting" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Nihal Patidar" />
+    <meta
+      name="desc"
+      content="This is a simple and intuitive weather application for Regional forcasting"
+    />
     <title>Weather App</title>
-    <link rel="stylesheet" href="./src/output.css" >
-    <link rel="icon" href="images/logo-2.jpg" >
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/output.css" />
+    <link rel="icon" href="images/logo-2.jpg" />
+    <link rel="stylesheet" href="./src/input.css" />
+  </head>
+  <body
+    class="bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center min-h-screen"
+  >
+    <!-- Innner Main-->
+    <div class="w-full bg-white rounded-2xl p-6 min-h-screen">
+      <!-- Header -->
+      <h1 class="text-2xl font-bold italic text-gray-600 text-center">
+        Weather DashBoard
+      </h1>
 
-</head>
-<body>
-    <h1 class=""> Start it </h1>
-</body>
+      <!-- User Functionalities -->
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+      >
+        <!-- Search Area Header-->
+        <div class="flex flex-col md:flex ">
+          <!-- <label for="city_name">Enter a city Name</label> -->
+          <div
+            class="outline-2 flex justify-between items-center outline-cyan-500 py-1 px-2 rounded-xl text-cyan-500 font-semibold"
+            id="search_area"
+          >
+            <input
+              class="capitalize px-4 py-1 focus:outline-none"
+              id="input_city_name"
+              placeholder="Enter the city Name"
+            />
+            <i class="fa-solid fa-bars text-xl" id="drop_down_bar"></i>
+          </div>
+          <div id="recent_city_dropdown" class="border-2 rounded-xl border-gray-400 h-48 w-40 hidden">
+          </div>
+
+          <button
+            class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold"
+          >
+            Search City
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="getApiData.js"></script>
+    <script src="seachBar.js"></script>
+  </body>
 </html>
