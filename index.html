@@ -75,16 +75,29 @@
                 <button class="btn-f">Todays</button>
                 <button class="btn-f">Tommorrow</button>
                 <!-- <button class="btn-f"> 5 Days </button> -->
-                <button class="btn-f"><sup><small class="scale-10"><i class="fa-solid fa-circle fo"></i></small></sup> C </button>
-                <button class="btn-f"><sup><small class="scale-10"><i class="fa-solid fa-circle fo"></i></small></sup> F </button>
+                <button class="btn-f"><sup>o</sup> C </button>
+                <button class="btn-f"><sup>o</sup> F </button>
              </div>
             
-             
+             <!-- One Day in Depth Dashboard -->
+             <div class="w-full bg-gray-200 h-80 grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1" id="info_board">
+                <div class="bg-cyan-400 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4"> 
+                    <h2 class="text-2xl font-bold capitalize" id="info_city_name">City Loading...</h2>
+                    <div class="w-16 h-16 rounded-2xl  flex justify-center items-center" id="day_category"><i class="fa-solid fa-sun text-amber-200 text-4xl"></i></div>
+                    <h3 class="text-xl font-bold capitalize" id="info_weather_category"> Loading...  <span></span></h3>
+                    <h1 class="text-4xl font-bold capitalize"> <span id="info_weather_temp">Loading... </span> <span><sup class="text-2xl">o</sup> C </span></h1>
+                </div>
+                <div class="col-span-1 info-grid-item"> Wind </div>
+                <div class="col-span-1 info-grid-item"> Moisture </div>
+                <div class="col-span-1 info-grid-item"> Rain </div>
+                <div class="col-span-1 info-grid-item"> Humidity </div>
+             </div>
          </div>
       </div>
     </div>
 
-    <!-- <script src="getApiData.js"></script> -->
+    <script src="getApiData.js"></script>
     <script src="searchBar.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
