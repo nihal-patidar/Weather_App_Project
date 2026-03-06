@@ -32,9 +32,7 @@
       </h1>
 
       <!-- User Functionalities -->
-      <div
-        class="flex flex-col gap-4"
-      >
+      <div class="flex flex-col gap-4">
         <!-- Search Area Header-->
         <div class="flex flex-col md:flex-row gap-2 relative w-fit mx-auto">
           <!-- <label for="city_name">Enter a city Name</label> -->
@@ -49,50 +47,132 @@
             />
             <i class="fa-solid fa-bars text-xl" id="drop_down_bar"></i>
           </div>
-          <div id="recent_city_dropdown" class="border-2 rounded-xl border-gray-400 h-48 w-60 hidden absolute top-10">
-          </div>
+          <div
+            id="recent_city_dropdown"
+            class="border-2 rounded-xl border-gray-400 h-48 w-60 hidden absolute top-10"
+          ></div>
 
           <div class="flex gap-3 justify-between items-center text-blue-500">
             <button
-            class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
-          >
-            <i class="fa-solid fa-arrow-right"></i> Search 
-          </button>
-          <i class="fa-solid ">OR</i>
-          <button
-            class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
-          >
-           <i class="fa-solid fa-location-crosshairs"></i> Current Location
-          </button>
+              class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
+            >
+              <i class="fa-solid fa-arrow-right"></i> Search
+            </button>
+            <i class="fa-solid">OR</i>
+            <button
+              class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
+            >
+              <i class="fa-solid fa-location-crosshairs"></i> Current Location
+            </button>
           </div>
         </div>
 
         <!-- Todays Weather Information Section -->
-         <div class="flex flex-col w-full">
-            
-            <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
-             <div class="flex justify-evenly md:justify-start items-center gap-0 md:gap-4 bg-gray-100 rounded-md py-1 px-4">
-                <button class="btn-f">Todays</button>
-                <button class="btn-f">Tommorrow</button>
-                <!-- <button class="btn-f"> 5 Days </button> -->
-                <button class="btn-f"><sup>o</sup> C </button>
-                <button class="btn-f"><sup>o</sup> F </button>
-             </div>
-            
-             <!-- One Day in Depth Dashboard -->
-             <div class="w-full bg-gray-200 h-80 grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1" id="info_board">
-                <div class="bg-cyan-400 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4"> 
-                    <h2 class="text-2xl font-bold capitalize" id="info_city_name">City Loading...</h2>
-                    <div class="w-16 h-16 rounded-2xl  flex justify-center items-center" id="day_category"><i class="fa-solid fa-sun text-amber-200 text-4xl"></i></div>
-                    <h3 class="text-xl font-bold capitalize" id="info_weather_category"> Loading...  <span></span></h3>
-                    <h1 class="text-4xl font-bold capitalize"> <span id="info_weather_temp">Loading... </span> <span><sup class="text-2xl">o</sup> C </span></h1>
-                </div>
-                <div class="col-span-1 info-grid-item"> Wind </div>
-                <div class="col-span-1 info-grid-item"> Moisture </div>
-                <div class="col-span-1 info-grid-item"> Rain </div>
-                <div class="col-span-1 info-grid-item"> Humidity </div>
-             </div>
-         </div>
+        <div class="flex flex-col w-full">
+          <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
+          <div
+            class="flex justify-evenly md:justify-start items-center gap-0 md:gap-4 bg-gray-100 rounded-md py-1 px-4"
+          >
+            <button class="btn-f" id="btn_today">Todays</button> <!--Shows that Current Dashboard shows todays weather Information -->
+            <button class="btn-f" id="btn_tomorrow">Tommorrow</button> <!-- User can click to view Tommorrow information -->
+            <!-- <button class="btn-f"> 5 Days </button> -->
+            <button class="btn-f" id="btn_cel"><sup>o</sup> C</button> <!-- User can toggle the between C and F -->
+            <button class="btn-f" id="btn_fer"><sup>o</sup> F</button>
+          </div>
+
+          <!-- Weather Information Dashboard with Responsive Design -->
+          <!--Using Grid with 2 Rows & 4 Columns on mediuma and large Devices -->
+          <!-- Using Grid with 4 Rows & 2 Colums on Small Devices -->
+          <div
+            class="w-full bg-gray-200 grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
+            id="info_board"
+          >
+            <!-- First Item Show City Name , Weather Category like ( Rain, clear , snow ) and Temperature in celsius-->
+            <div
+              class="bg-cyan-400 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80"
+            >
+              <h2 class="text-2xl font-bold capitalize" id="info_city_name">
+                City Loading...
+              </h2>
+              <div
+                class="w-16 h-16 rounded-2xl flex justify-center items-center"
+                id="day_category"
+              >
+                <i class="fa-solid fa-sun text-amber-200 text-4xl"></i>
+              </div>
+              <h3
+                class="text-xl font-bold capitalize"
+                id="info_weather_category"
+              >
+                Loading... <span></span>
+              </h3>
+              <h1 class="text-4xl font-bold capitalize">
+                <span id="info_weather_temp">Loading... </span>
+                <span><sup class="text-2xl">o</sup> C </span>
+              </h1>
+            </div>
+            <!-- Second Item Show Details about Wind like (Speed , Direction) -->
+            <div
+              class="col-span-1 info-grid-item rounded-md flex flex-col p-5 gap-4"
+            >
+              <h2 class="" id="info_wind">
+                Wind <i class="fa-solid fa-wind"></i>
+              </h2>
+              <div>
+                <h2 class="" id="info_wind">
+                  <span>Speed : </span><span id="info_wind_speed"></span>
+                </h2>
+                <!-- <h2 class="" id="info_wind"> -->
+                  <!-- <span>Direction : </span><span id="info_wind_dir"></span> -->
+                <!-- </h2> -->
+              </div>
+            </div>
+
+            <!--Grid Item for Weather Data For Humidity-->
+            <div
+              class="col-span-1 info-grid-item rounded-md flex flex-col p-5 gap-4"
+            >
+              <h2 class="" id="info_wind">
+                Humidity <i class="fa-solid fa-wind"></i>
+              </h2>
+              <div>
+                <h2 class="" id="info_wind">
+                  <span id="info_humidity_value"></span>
+                </h2>
+              </div>
+            </div>
+
+            <!--Grid Item for Weather Data For Pressure-->
+            <div
+              class="col-span-1 info-grid-item rounded-md flex flex-col p-5 gap-4"
+            >
+              <h2 class="" id="info_wind">
+                Pressure <i class="fa-solid fa-wind"></i>
+              </h2>
+              <div>
+                <h2 class="" id="info_wind">
+                  <span id="info_pressure_value"></span>
+                </h2>
+              </div>
+            </div>
+            <div
+              class="col-span-1 info-grid-item rounded-md flex flex-col p-5 gap-4"
+            >
+              <h2 class="" id="info_wind">
+                Temperature <i class="fa-solid fa-wind"></i>
+              </h2>
+              <div>
+                <h2 class="" id="info_wind">
+                  <span>Min : </span><span id="info_min_temp"></span>
+                </h2>
+
+                <h2 class="" id="info_wind">
+                  <span>Max : </span><span id="info_max_temp"></span>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
