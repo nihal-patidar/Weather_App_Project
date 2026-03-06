@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+
+.btn-f {
+    @apply bg-gray-300 text-gray-600 scale-75 md:scale-none m-0 text-nowrap hover:bg-cyan-500 rounded-md text-center px-4 py-2 hover:text-white font-semibold w-fit ;
+}
