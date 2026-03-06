@@ -17,9 +17,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./src/output.css" />
+    <link rel="stylesheet" href="output.css" />
     <link rel="icon" href="images/logo-2.jpg" />
-    <link rel="stylesheet" href="./src/input.css" />
+    <link rel="stylesheet" href="input.css" />
   </head>
   <body
     class="bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center min-h-screen"
@@ -33,7 +33,7 @@
 
       <!-- User Functionalities -->
       <div
-        class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+        class="flex flex-col gap-4"
       >
         <!-- Search Area Header-->
         <div class="flex flex-col md:flex-row gap-2 relative w-fit mx-auto">
@@ -66,10 +66,25 @@
           </button>
           </div>
         </div>
+
+        <!-- Todays Weather Information Section -->
+         <div class="flex flex-col w-full">
+            
+            <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
+             <div class="flex justify-evenly md:justify-start items-center gap-0 md:gap-4 bg-gray-100 rounded-md py-1 px-4">
+                <button class="btn-f">Todays</button>
+                <button class="btn-f">Tommorrow</button>
+                <!-- <button class="btn-f"> 5 Days </button> -->
+                <button class="btn-f"><sup><small class="scale-10"><i class="fa-solid fa-circle fo"></i></small></sup> C </button>
+                <button class="btn-f"><sup><small class="scale-10"><i class="fa-solid fa-circle fo"></i></small></sup> F </button>
+             </div>
+            
+             
+         </div>
       </div>
     </div>
 
-    <script src="getApiData.js"></script>
+    <!-- <script src="getApiData.js"></script> -->
     <script src="searchBar.js"></script>
   </body>
 </html>
