@@ -93,3 +93,28 @@ function unClickBtn(element_class) {
 
 
 
+//Celsius (°C) to Fahrenheit (°F),
+
+
+
+document.getElementById('btn_fer').addEventListener('click',()=>{
+    let temp = document.getElementById("info_weather_temp").textContent ;
+
+    document.getElementById("info_weather_temp").textContent = celsiusToFahrenheit(temp);
+    document.getElementById("temp_unit").textContent = 'F' ;
+    
+})
+
+// Fahrenheit (°F) to Celsius (°C) 
+document.getElementById('btn_cel').addEventListener('click',()=>{
+    let temp = document.getElementById("info_weather_temp").textContent = weather.main.temp ;
+    document.getElementById("temp_unit").textContent = 'C' ;
+    
+})
+
+function celsiusToFahrenheit(celsius) {
+  return Math.round((celsius * 9/5) + 32);
+}
+
+
+

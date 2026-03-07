@@ -51,6 +51,8 @@ getCurrentLocation();
 
 
 
+
+
 // Event Listener on Use Current Location ;
 
 document.getElementById('curr_loc_btn').addEventListener('click',()=>{
@@ -66,4 +68,46 @@ document.getElementById('curr_loc_btn').addEventListener('click',()=>{
     // document.getElementById('curr_loc_btn').textContent = "Loading..";
 
 })
+
+
+// Event Listener on Search City Input and Button ;
+document.getElementById('search_by_city').addEventListener('click',()=>{
+
+    document.getElementById("search_by_city").disabled = true ;
+    document.getElementById("search_by_city").textContent = "Loading..." ;
+
+    setTimeout(()=>{
+      document.getElementById("search_by_city").disabled = false ;
+    },1000*5)
+    getCityWeather();
+    
+    // document.getElementById('curr_loc_btn').textContent = "Loading..";
+
+})
+
+
+
+// Search by City 
+
+function getCityWeather(){
+
+    const input = document.getElementById('input_city_name');
+
+    const city_name = input.value ;
+
+    if(city_name === ""){
+        alert('Please Enter City Name')
+        return ;
+    }
+
+    getCityWeatherApi(city_name);
+    // if(input_value)
+
+
+
+    
+
+    
+}
+
 

@@ -5,28 +5,28 @@ const url = `https://api.openweathermap.org/data/2.5/weather?q=&appid=${apiKey}&
 
 let weather = {};
 
-async function getWeather(city = "Indore") {
+async function getCityWeatherApi(city = "Indore") {
   // const city = "Indore";
 
-  if (!localStorage.getItem("weather_data")) {
-    try {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=95c3cff85637b75da8b956e35d554997&units=metric`;
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=95c3cff85637b75da8b956e35d554997&units=metric`;
 
-      fetch(url).then(async (response) => {
-        const data = await response.json();
-        console.log("data", data);
-        setDataLS("weather_data", data);
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    fetch(url).then(async (response) => {
+      const data = await response.json();
+      if (data) {
+        console.log("city weather" , data);
+        weather = data;
+        document.getElementById("search_by_city").textContent = "Search";
+
+        setWeatherInfoToPanel(weather);
+      }
+    });
+  } catch (err) {
+    console.log(err);
   }
 
-  weather = getDataLS("weather_data");
-  console.log("weather data", weather);
 }
 
-getWeather();
 
 // Utility Function for setting data to Local Storage
 function setDataLS(key, data) {
@@ -47,7 +47,6 @@ function getWeatherDataFromCoords(lat, long) {
       console.log("weather 3", data);
       weather = data;
       document.getElementById("curr_loc_btn").textContent = "Current Location";
-      
 
       setWeatherInfoToPanel(weather);
     }
