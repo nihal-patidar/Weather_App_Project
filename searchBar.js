@@ -36,3 +36,34 @@ let drop_down_bar_open = false ;
 
 
 })();
+
+
+function getCurrentLocation(){
+
+    navigator.geolocation.getCurrentPosition((position)=>{
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        getWeatherDataFromCoords(lat,lon);
+    },(err)=>{console.log("error",err.message)});
+}
+
+getCurrentLocation();
+
+
+
+// Event Listener on Use Current Location ;
+
+document.getElementById('curr_loc_btn').addEventListener('click',()=>{
+    document.getElementById("curr_loc_btn").disabled = true ;
+    document.getElementById("curr_loc_btn").textContent = "Loading..." ;
+
+    setTimeout(()=>{
+      document.getElementById("curr_loc_btn").disabled = false ;
+
+    },1000*15)
+    getCurrentLocation();
+    
+    // document.getElementById('curr_loc_btn').textContent = "Loading..";
+
+})
+

@@ -1,6 +1,6 @@
 // This function writes weather information to dashboard Dynamically.
 // There are various type of information is written from here to organise and keep similar write at same place
-(function setWeatherInfoToPanel() {
+function setWeatherInfoToPanel(weather) {
   if (!weather) return;
 
   document.getElementById("info_city_name").textContent = weather.name;
@@ -42,7 +42,7 @@
       document.getElementById("day_category").innerHTML = snow;
       break;
   }
-})();
+}
 
 // Initializing Click effect on Today button , by default
 document
