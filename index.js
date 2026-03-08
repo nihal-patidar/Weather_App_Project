@@ -160,18 +160,16 @@ function closeMessageBox() {
 
 // storing recent search list
 
-
-let recent_search_list = getDataLS("recent_search_list")
+let recent_search_list = getDataLS("recent_search_list");
 
 if (!recent_search_list) {
-    recent_search_list = [];
-    // ---- ---- ----
-    setDataLS("recent_search_list", recent_search_list);
+  recent_search_list = [];
+  // ---- ---- ----
+  setDataLS("recent_search_list", recent_search_list);
 }
 
 // showMessageBox();
-showRecentSearch()
-
+showRecentSearch();
 
 // ---- ---- ---- ---- ----
 
@@ -180,7 +178,8 @@ function showRecentSearch() {
 
   box.innerHTML = ""; // clearing previous list ;
 
-  if (recent_search_list.length === 0) { //
+  if (recent_search_list.length === 0) {
+    //
     box.classList.add("hidden");
     return;
   }
@@ -188,7 +187,6 @@ function showRecentSearch() {
   box.classList.remove("hidden");
 
   recent_search_list.forEach((item, index) => {
-    
     const row = document.createElement("div");
 
     row.className =
@@ -200,7 +198,6 @@ function showRecentSearch() {
     `;
 
     // Add events directly
-
 
     box.appendChild(row);
   });
@@ -226,8 +223,7 @@ function addRecent(value) {
     recent_search_list.pop();
   }
 
-    setDataLS("recent_search_list", recent_search_list);
-
+  setDataLS("recent_search_list", recent_search_list);
 
   showRecentSearch();
 }
@@ -245,4 +241,54 @@ function removeRecent(index) {
   showRecentSearch();
 }
 
+// Research for open API return 40 record
 
+let fiveDayForcasts ;
+
+async function get5Dayforcast(city = "Indore") {
+  // const city = "Indore";
+
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log("5day data" , data.list); // contains 40 records
+        data_list = data.list ;
+        extractFiveDayForecast(data_list);
+
+      });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+get5Dayforcast()
+
+// extracting 5 day forecast from 40 records
+
+
+function extractFiveDayForecast(list){
+
+  const forecast = []
+
+  list.forEach((item)=>{
+
+    if(item.dt_txt.includes("12:00:00")){ // this give the accurate data for each day (day time);
+
+      forecast.push({
+        date : item.dt_txt.split(" ")[0], // taking out date
+        temp : item.main.temp,
+        wind : item.wind.speed,
+        humidity : item.main.humidity
+      })
+
+    }
+
+  })
+
+  console.log('5 day data', forecast);
+  return forecast ;
+
+}
