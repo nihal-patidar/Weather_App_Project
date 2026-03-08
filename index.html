@@ -31,7 +31,6 @@
         Weather DashBoard
       </h1>
 
-      <!-- User Functionalities -->
       <div class="flex flex-col gap-4">
         <!-- Search Area Header-->
         <div class="flex flex-col md:flex-row gap-2 relative w-fit mx-auto">
@@ -237,10 +236,20 @@
             </div>
           </div>
         </div>
+
+        <!-- Extended Forecast Section -->
+        <div class="w-full mt-6">
+          <!-- heading -->
+          <h2 class="text-xl font-semibold mb-4">5 Day Forecast</h2>
+
+          <!-- forecast grid -->
+          <div
+            id="forecast_container"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+          ></div>
+        </div>
       </div>
     </div>
-
-    
 
     <!-- Message Box Container -->
     <div
