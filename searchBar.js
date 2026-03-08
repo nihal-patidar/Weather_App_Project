@@ -21,22 +21,36 @@
 
 // Adding functionalities to show and hide Recent Search DropDown.
 
-let drop_down_bar_open = false ;
-(function dropDownBarToggle(){
-    document.getElementById('drop_down_bar').addEventListener('click',()=>{
-        if(drop_down_bar_open){ // open 
-            document.getElementById('recent_city_dropdown').classList.add('hidden');
-            drop_down_bar_open = !drop_down_bar_open ;
-        }else{ // close 
-            document.getElementById('recent_city_dropdown').classList.remove('hidden');
-            drop_down_bar_open = !drop_down_bar_open ;
+// let drop_down_bar_open = false ;
+// (function dropDownBarToggle(){
+//     document.getElementById('drop_down_bar').addEventListener('click',()=>{
+//         if(drop_down_bar_open){ // open 
+//             document.getElementById('recent_city_dropdown').classList.add('hidden');
+//             drop_down_bar_open = !drop_down_bar_open ;
+//         }else{ // close 
+//             document.getElementById('recent_city_dropdown').classList.remove('hidden');
+//             drop_down_bar_open = !drop_down_bar_open ;
 
-        }
-    })
+//         }
+//     })
 
 
-})();
+// })();
 
+document.getElementById('input_city_name').addEventListener('focus',()=>{
+    document.getElementById('recent_city_dropdown').classList.remove('hidden');
+})
+
+document.getElementById('input_city_name').addEventListener('blur',()=>{
+    setTimeout(()=>{
+
+        document.getElementById('recent_city_dropdown').classList.add('hidden');
+    },200)
+})
+
+// document.getElementById('recent_city_dropdown').addEventListener('mouseenter',()=>{
+//     document.getElementById('recent_city_dropdown').classList.remove('hidden');
+// })
 
 function getCurrentLocation(){
 
@@ -80,7 +94,10 @@ document.getElementById('search_by_city').addEventListener('click',()=>{
       document.getElementById("search_by_city").disabled = false ;
     },1000*5)
     getCityWeather();
-    
+
+    const input = document.getElementById('input_city_name');
+
+    addRecent(input.value)
     // document.getElementById('curr_loc_btn').textContent = "Loading..";
 
 })
