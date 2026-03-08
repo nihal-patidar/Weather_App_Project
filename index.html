@@ -50,7 +50,13 @@
           <div
             id="recent_city_dropdown"
             class="border-2 rounded-xl border-gray-400 h-48 w-60 hidden absolute top-10"
-          ></div>
+          >
+            <!-- recent search box -->
+            <div
+              id="recent_search_box"
+              class="flex flex-col gap-1 w-full h-full border rounded-md p-2 bg-white shadow-sm"
+            ></div>
+          </div>
 
           <div class="flex gap-3 justify-between items-center text-blue-500">
             <button
@@ -232,6 +238,31 @@
           </div>
         </div>
       </div>
+    </div>
+
+    
+
+    <!-- Message Box Container -->
+    <div
+      id="message_box"
+      class="fixed top-6 right-6 hidden max-w-sm w-full rounded-md shadow-lg bg-white border-2 border-gray-200 p-4 flex items-start gap-3"
+    >
+      <!-- icon -->
+      <div id="message_icon" class="text-lg mt-1"></div>
+
+      <!-- message content -->
+      <div class="flex-1">
+        <h3 id="message_title" class="font-semibold text-sm">Message</h3>
+        <p id="message_text" class="text-sm text-gray-600"></p>
+      </div>
+
+      <!-- close button -->
+      <button
+        onclick="closeMessageBox()"
+        class="text-gray-400 hover:text-gray-600 text-sm"
+      >
+        ✕
+      </button>
     </div>
 
     <script src="getApiData.js"></script>
