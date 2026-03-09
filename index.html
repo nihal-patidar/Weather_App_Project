@@ -78,10 +78,9 @@
         <div class="flex flex-col w-full">
           <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
           <div
-            class="flex justify-evenly md:justify-start items-center bg-gray-100 rounded-md py-1 px-4 gap-0 md:gap-4 "
+            class="flex justify-evenly md:justify-start items-center bg-gray-100 rounded-md py-1 px-4 gap-0 md:gap-4"
             id="btn-f-container"
           >
-
             <button
               class="btn-f-utility bg-gray-300 text-gray-600"
               id="btn_today"
@@ -149,90 +148,90 @@
 
             <!-- Second Item Show Details about Wind like (Speed , Direction) -->
             <!-- Grid Item for Weather Data For Wind -->
+            <!-- Grid Item for Weather Data For Wind -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/10 backdrop-blur-sm shadow-sm"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
-              <!-- heading section -->
+              <!-- heading section for wind -->
               <h2
-                class="flex items-center justify-between text-lg font-semibold"
+                class="flex items-center justify-between text-lg font-semibold text-white"
               >
                 <span>Wind</span>
-                <i class="fa-solid fa-wind opacity-70"></i>
+                <!-- wind icon -->
+                <i class="fa-solid fa-wind text-cyan-200"></i>
               </h2>
 
               <!-- wind data -->
-              <div class="flex flex-col gap-2 text-sm">
+              <div class="flex flex-col gap-2 text-sm text-gray-100">
                 <h2>
-                  <span class="opacity-70">Speed :</span>
+                  <span class="opacity-80">Speed :</span>
                   <span id="info_wind_speed" class="font-medium"></span>
                 </h2>
-
-                <!-- if direction required later we can enable this -->
-                <!--
-    <h2>
-      <span class="opacity-70">Direction :</span>
-      <span id="info_wind_dir" class="font-medium"></span>
-    </h2>
-    -->
               </div>
             </div>
 
             <!-- Grid Item for Weather Data For Humidity -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/10 backdrop-blur-sm shadow-sm"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading -->
               <h2
-                class="flex items-center justify-between text-lg font-semibold"
+                class="flex items-center justify-between text-lg font-semibold text-white"
               >
                 <span>Humidity</span>
-                <i class="fa-solid fa-droplet opacity-70"></i>
+                <!-- humidity icon -->
+                <i class="fa-solid fa-droplet text-blue-300"></i>
               </h2>
 
               <!-- humidity value -->
-              <div class="text-sm">
+              <div class="text-sm text-gray-100">
                 <h2>
                   <span id="info_humidity_value" class="font-medium"></span>
+                  <span class="opacity-80">%</span>
                 </h2>
               </div>
             </div>
 
             <!-- Grid Item for Weather Data For Pressure -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/10 backdrop-blur-sm shadow-sm"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading -->
               <h2
-                class="flex items-center justify-between text-lg font-semibold"
+                class="flex items-center justify-between text-lg font-semibold text-white"
               >
                 <span>Pressure</span>
-                <i class="fa-solid fa-gauge opacity-70"></i>
+                <!-- pressure icon -->
+                <i class="fa-solid fa-gauge text-purple-300"></i>
               </h2>
 
               <!-- pressure value -->
-              <div class="text-sm">
+              <div class="text-sm text-gray-100">
                 <h2>
                   <span id="info_pressure_value" class="font-medium"></span>
+                  <span class="opacity-80">hPa</span>
                 </h2>
               </div>
             </div>
 
             <!-- Grid Item for Weather Data For Temperature -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/10 backdrop-blur-sm shadow-sm"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading -->
               <h2
-                class="flex items-center justify-between text-lg font-semibold"
+                class="flex items-center justify-between text-lg font-semibold text-white"
               >
                 <span>Temperature</span>
-                <i class="fa-solid fa-temperature-half opacity-70"></i>
+                <!-- temperature icon -->
+                <i class="fa-solid fa-temperature-half text-orange-300"></i>
               </h2>
 
               <!-- temperature values -->
-              <div class="flex flex-col gap-2 text-sm">
+              <div class="flex flex-col gap-2 text-sm text-gray-100">
+                <!-- min temperature -->
                 <h2>
-                  <span class="opacity-70">Min :</span>
+                  <span class="opacity-80">Min :</span>
                   <span
                     id="info_min_temp"
                     class="font-medium temp_value"
@@ -240,10 +239,12 @@
                   <span class="temp_unit">°C</span>
                 </h2>
 
+                <!-- max temperature -->
                 <h2>
-                  <span class="opacity-70">Max :</span>
+                  <span class="opacity-80">Max :</span>
+                  <!-- removed extra space in id -->
                   <span
-                    id="info_max_temp "
+                    id="info_max_temp"
                     class="font-medium temp_value"
                   ></span>
                   <span class="temp_unit">°C</span>
@@ -263,8 +264,8 @@
             id="forecast_container"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
           >
-        <!-- Each Card will appear here-->
-        </div>
+            <!-- Each Card will appear here-->
+          </div>
         </div>
       </div>
     </div>
