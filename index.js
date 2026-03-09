@@ -345,4 +345,23 @@ function renderForecast(data) {
   });
 }
 
+// returning weather icon according to weather type
+function getWeatherIcon(type) {
+  if (type === "Clear") return "fa-sun text-yellow-400";
+  if (type === "Rain") return "fa-cloud-rain text-blue-400";
+  if (type === "Snow") return "fa-snowflake text-cyan-200";
+  if (type === "Clouds") return "fa-cloud text-gray-300";
+  if (type === "Thunderstorm") return "fa-bolt text-yellow-300";
 
+  return "fa-cloud text-gray-300";
+}
+
+// temperature color based on value
+function getTempColor(temp) {
+  if (temp <= 10) return "text-blue-400";
+  if (temp <= 20) return "text-green-400";
+  if (temp <= 30) return "text-yellow-400";
+  if (temp <= 40) return "text-orange-400";
+
+  return "text-red-500";
+}
