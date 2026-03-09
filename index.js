@@ -192,13 +192,24 @@ function showRecentSearch() {
   recent_search_list.forEach((item, index) => {
     const row = document.createElement("div");
 
-    row.className =
-      "flex justify-between items-center px-2 py-1 hover:bg-gray-100 rounded cursor-pointer";
+// styling for each recent search row
+row.className =
+  "flex justify-between items-center px-3 py-2 border-b border-gray-200 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200 cursor-pointer";
 
-    row.innerHTML = `
-      <span onclick="selectRecent('${item}')">${item}</span>  
-      <button onclick="removeRecent(${index})">x</button>
-    `;
+// clicking on row should select that city
+row.onclick = () => selectRecent(item);
+
+row.innerHTML = `
+  <span>${item}</span>
+
+  <!-- remove button -->
+  <button 
+    class="text-gray-400 hover:text-red-500 transition-colors"
+    onclick="removeRecent(${index})"
+  >
+    x
+  </button>
+`;
 
     // Add events directly
 
@@ -364,4 +375,13 @@ function getTempColor(temp) {
   if (temp <= 40) return "text-orange-400";
 
   return "text-red-500";
+}
+
+// getWeatherData
+// getForecastData
+// getWeatherAndForecastData
+
+
+function InitializeApplication(){
+
 }
