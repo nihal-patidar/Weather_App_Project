@@ -3,45 +3,43 @@
 function setWeatherInfoToPanel(weather) {
   if (!weather) return;
 
+  const weatherIcon = getWeatherIcon(weather.weather[0].main);
+  const tempColor = getTempColor(weather.main.temp);
+
+  // setting main weather icon
+  document.getElementById("day_category").innerHTML =
+    `<i class="fa-solid ${weatherIcon} text-4xl"></i>`;
+
+  // city name
   document.getElementById("info_city_name").textContent = weather.name;
-  document.getElementById("info_weather_category").textContent =
-    weather.weather[0].main;
-  document.getElementById("info_weather_temp").textContent = weather.main.temp;
-  document.getElementById("info_wind_speed").textContent =
-    `${weather.wind.speed} Km/h`;
-  // document.getElementById("info_wind_dir").textContent = `${weather.wind.deg} Degree` ;
-  document.getElementById("info_humidity_value").textContent =
-    `${weather.main.humidity} `;
-  document.getElementById("info_pressure_value").textContent =
-    `${weather.main.pressure} `;
-  document.getElementById("info_min_temp").textContent =
-    `${weather.main.temp_max} `;
-  document.getElementById("info_max_temp").textContent =
-    `${weather.main.temp_min} `;
 
-  let cloudy_sun = `<i class="fa-solid fa-cloud-sun text-4xl"></i>`;
-  let sunny = `<i class="fa-solid fa-sun text-amber-600 text-4xl"></i>`;
-  let clear = `<i class="fa-solid fa-sun text-amber-200 text-4xl"></i>`;
-  let rain = `<i class="fa-solid fa-cloud-showers-heavy text-4xl"></i>`;
-  let snow = `<i class="fa-solid fa-snowflake text-4xl"></i>`;
+  // weather type with icon
+  document.getElementById("info_weather_category").innerHTML =
+    `<i class="fa-solid ${weatherIcon}"></i> ${weather.weather[0].main}`;
 
-  switch (weather.weather[0].main.toLowerCase()) {
-    case "rain":
-      document.getElementById("day_category").innerHTML = rain;
-      break;
+  // temperature with dynamic color
+  document.getElementById("info_weather_temp").innerHTML =
+    `<span class="${tempColor}">${weather.main.temp}</span>`;
 
-    case "clear":
-      document.getElementById("day_category").innerHTML = clear;
-      break;
+  // wind speed
+  document.getElementById("info_wind_speed").innerHTML =
+    `<i class="fa-solid fa-wind text-cyan-200"></i> ${weather.wind.speed} Km/h`;
 
-    case "summer":
-      document.getElementById("day_category").innerHTML = sunny;
-      break;
+  // humidity
+  document.getElementById("info_humidity_value").innerHTML =
+    `<i class="fa-solid fa-droplet text-blue-200"></i> ${weather.main.humidity}`;
 
-    case "snow":
-      document.getElementById("day_category").innerHTML = snow;
-      break;
-  }
+  // pressure
+  document.getElementById("info_pressure_value").innerHTML =
+    `<i class="fa-solid fa-gauge text-purple-200"></i> ${weather.main.pressure}`;
+
+  // min temperature
+  document.getElementById("info_min_temp").innerHTML =
+    `<i class="fa-solid fa-temperature-arrow-down text-blue-200"></i> ${weather.main.temp_min}`;
+
+  // max temperature
+  document.getElementById("info_max_temp").innerHTML =
+    `<i class="fa-solid fa-temperature-arrow-up text-red-200"></i> ${weather.main.temp_max}`;
 }
 
 // Initializing Click effect on Today button , by default
@@ -95,16 +93,21 @@ function unClickBtn(element_class) {
 document.getElementById("btn_fer").addEventListener("click", () => {
   let temp = document.getElementById("info_weather_temp").textContent;
 
-  document.getElementById("info_weather_temp").textContent =
-    celsiusToFahrenheit(temp);
-  document.getElementById("temp_unit").textContent = "F";
+  document
+    .querySelectorAll(".temp_value")
+    .forEach((element) => (element.textContent = celsiusToFahrenheit(temp)));
+  document
+    .querySelectorAll(".temp_unit")
+    .forEach((element) => (element.textContent = "°F"));
 });
 
 // Fahrenheit (°F) to Celsius (°C)
 document.getElementById("btn_cel").addEventListener("click", () => {
   let temp = (document.getElementById("info_weather_temp").textContent =
     weather.main.temp);
-  document.getElementById("temp_unit").textContent = "C";
+  document
+    .querySelectorAll(".temp_unit")
+    .forEach((element) => (element.textContent = "°C"));
 });
 
 function celsiusToFahrenheit(celsius) {
@@ -243,7 +246,7 @@ function removeRecent(index) {
 
 // Research for open API return 40 record
 
-let fiveDayForcasts ;
+let fiveDayForcasts;
 
 async function get5Dayforcast(city = "Indore") {
   // const city = "Indore";
@@ -255,40 +258,79 @@ async function get5Dayforcast(city = "Indore") {
       .then((res) => res.json())
       .then((data) => {
         //console.log("5day data" , data.list); // contains 40 records
-        data_list = data.list ;
+        data_list = data.list;
         extractFiveDayForecast(data_list);
-
       });
   } catch (err) {
     console.log(err);
   }
 }
 
-get5Dayforcast()
+get5Dayforcast();
 
 // extracting 5 day forecast from 40 records
 
+function extractFiveDayForecast(list) {
+  const forecast = [];
 
-function extractFiveDayForecast(list){
-
-  const forecast = []
-
-  list.forEach((item)=>{
-
-    if(item.dt_txt.includes("12:00:00")){ // this give the accurate data for each day (day time);
+  list.forEach((item) => {
+    if (item.dt_txt.includes("12:00:00")) {
+      // this give the accurate data for each day (day time);
 
       forecast.push({
-        date : item.dt_txt.split(" ")[0], // taking out date
-        temp : item.main.temp,
-        wind : item.wind.speed,
-        humidity : item.main.humidity
-      })
-
+        date: item.dt_txt.split(" ")[0], // taking out date
+        temp: item.main.temp,
+        wind: item.wind.speed,
+        humidity: item.main.humidity,
+        weather: item.weather[0].main,
+      });
     }
+  });
 
-  })
+  console.log("5 day data", forecast);
 
-  console.log('5 day data', forecast);
-  return forecast ;
+  renderForecast(forecast);
+}
 
+function renderForecast(data) {
+  const container = document.getElementById("forecast_container");
+
+  // clearing previous cards
+  container.innerHTML = "";
+
+  data.forEach((day) => {
+    const weatherIcon = getWeatherIcon(day.weather);
+    const tempColor = getTempColor(day.temp);
+
+    const card = document.createElement("div");
+
+    // improved contrast + cleaner card look
+    card.className =
+      "rounded-lg p-4 flex flex-col gap-3 bg-white shadow-md border border-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer";
+
+
+
+    container.appendChild(card);
+  });
+}
+
+// returning weather icon according to weather type
+function getWeatherIcon(type) {
+  if (type === "Clear") return "fa-sun text-yellow-400";
+  if (type === "Rain") return "fa-cloud-rain text-blue-400";
+  if (type === "Snow") return "fa-snowflake text-cyan-200";
+  if (type === "Clouds") return "fa-cloud text-gray-300";
+  if (type === "Thunderstorm") return "fa-bolt text-yellow-300";
+
+  return "fa-cloud text-gray-300";
+}
+
+// temperature color based on value
+function getTempColor(temp) {
+  if (temp <= 10) return "text-blue-400";
+  if (temp <= 20) return "text-green-400";
+  if (temp <= 30) return "text-yellow-400";
+  if (temp <= 40) return "text-orange-400";
+
+  return "text-red-500";
 }
