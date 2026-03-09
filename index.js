@@ -308,29 +308,41 @@ function renderForecast(data) {
     card.className =
       "rounded-lg p-4 flex flex-col gap-3 bg-white shadow-md border border-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer";
 
+    card.innerHTML = `
 
+      <!-- date -->
+      <h3 class="font-semibold text-sm text-gray-700">
+        ${day.date}
+      </h3>
+
+      <!-- weather icon -->
+      <div class="flex justify-center text-3xl">
+        <i class="fa-solid ${weatherIcon}"></i>
+      </div>
+
+      <!-- temperature -->
+      <div class="flex items-center gap-2 text-sm text-gray-700">
+        <i class="fa-solid fa-temperature-half text-orange-500"></i>
+        <span class="font-medium ${tempColor}">${day.temp}</span>
+        <span class="temp_unit">°C</span>
+      </div>
+
+      <!-- wind -->
+      <div class="flex items-center gap-2 text-sm text-gray-700">
+        <i class="fa-solid fa-wind text-cyan-500"></i>
+        <span>${day.wind} km/h</span>
+      </div>
+
+      <!-- humidity -->
+      <div class="flex items-center gap-2 text-sm text-gray-700">
+        <i class="fa-solid fa-droplet text-blue-500"></i>
+        <span>${day.humidity}%</span>
+      </div>
+
+    `;
 
     container.appendChild(card);
   });
 }
 
-// returning weather icon according to weather type
-function getWeatherIcon(type) {
-  if (type === "Clear") return "fa-sun text-yellow-400";
-  if (type === "Rain") return "fa-cloud-rain text-blue-400";
-  if (type === "Snow") return "fa-snowflake text-cyan-200";
-  if (type === "Clouds") return "fa-cloud text-gray-300";
-  if (type === "Thunderstorm") return "fa-bolt text-yellow-300";
 
-  return "fa-cloud text-gray-300";
-}
-
-// temperature color based on value
-function getTempColor(temp) {
-  if (temp <= 10) return "text-blue-400";
-  if (temp <= 20) return "text-green-400";
-  if (temp <= 30) return "text-yellow-400";
-  if (temp <= 40) return "text-orange-400";
-
-  return "text-red-500";
-}
