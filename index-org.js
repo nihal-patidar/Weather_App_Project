@@ -8,7 +8,7 @@
 
 // setWeatherInfoToPanel(weather) : It set the data to UI
 
-//setDataLS(key, data) : set the recent search array to LocalStorage
+// setDataLS(key, data) : set the recent search array to LocalStorage
 
 // getDataLS(key) : get the recent search List from LocalStorage
 
@@ -501,7 +501,7 @@ function showRecentSearch() {
 
     // styling for each recent search row
     row.className =
-      "flex justify-between items-center px-3 py-2 border-b border-gray-200 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200 cursor-pointer";
+      "flex justify-between items-center px-3 py-1 border-b border-gray-200 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200 cursor-pointer";
 
     // clicking on row should select that city
     row.onclick = () => selectRecent(item);
