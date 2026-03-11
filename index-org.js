@@ -14,7 +14,7 @@
 
 // toggleRecentBox() : Hide and show the Recent Search Box on Input focus.
 
-// searchAreaChangeOutline() : Changes the outline of City Search Input box on focus
+// addFocusAndBlurEvent() : Changes the outline of City Search Input box on focus
 
 //
 
@@ -27,18 +27,51 @@ let weather = {};
 let fiveDayForcasts;
 let curr_city_search ;
 
-initDefaultActions();
+// Sets width of recent search box equal to width of search bar
+setWidthSearchBox();
+
+// Add event to the browser as DOM load to make available feature instantly
+// like - to show buttons clicked
+ChangeButtonsToClickedButtons();
+
+// gets list of 40 predictions from open weather api
+// later extracts most relevant 5 predictions
 get5Dayforcast();
+
+// get the coordinates of user's current location
 getCurrentLocation();
-showRecentSearch();
-addEventToGetCurrentLocationWeather();
-addEventToGetWeatherDataByCityName();
-searchAreaChangeOutline();
+
+// render the recent search list into Recent Search Box
+// it works only when user clicks on input search
+render5RecentSearches();
+
+// add click Event on Current Location button to fetch current location weather
+addClickEvent1();
+
+// add click event on Search City Button to read input search
+addClickEvent2();
+
+// adds focus event on city search input to change input outline style
+// adds blur event on city search input to change input outline style
+addFocusAndBlurEvent();
+
+// adds focus event on city search input and allow user to select recent searches
+// add blur event on city search input and close recent search box 
 toggleRecentBox();
+
+// adds click event to alter the temperature unit.
 toggleUnitBtn();
+
+// converts value 
 C_To_F_conversion();
 F_To_C_conversion();
-clickUtilityBtn()
+
+// add click event make button look like clicked 
+addClickEvent3()
+
+// add resize event on window to set width recent search box.
+window.addEventListener('resize',setWidthSearchBox);
+
 //----------------------------- API CALLS -----------------------------------
 
 if (!recent_search_list) {
@@ -78,7 +111,7 @@ async function getCityWeatherApi(city) {
       if (data) {
         console.log("city weather", data);
         weather = data;
-        document.getElementById("search_by_city").textContent = "Search";
+        document.getElementById("search_by_city").innerHTML = `<i class="fa-solid fa-arrow-right"></i> Search`;
 
         setWeatherInfoToPanel(weather);
       }
@@ -110,7 +143,7 @@ function getWeatherDataFromCoords(lat, long) {
     if (data) {
       console.log("weather 3", data);
       weather = data;
-      document.getElementById("curr_loc_btn").textContent = "Current Location";
+      document.getElementById("curr_loc_btn").innerHTML = `<i class="fa-solid fa-location-crosshairs"></i> Current Location`
       curr_city_search = weather.name ;
       get5Dayforcast(curr_city_search)
       setWeatherInfoToPanel(weather);
@@ -183,8 +216,10 @@ function setWeatherInfoToPanel(weather) {
 // ----------------- X ----------------------- X ----------------------------
 
 // Event Listener on Use Current Location ;
+// add click Event on Current Location button to fetch current location weather
+// and forecast and then call function to get current location
 
-function addEventToGetCurrentLocationWeather() {
+function addClickEvent1() {
   document.getElementById("curr_loc_btn").addEventListener("click", () => {
     document.getElementById("curr_loc_btn").disabled = true;
     document.getElementById("curr_loc_btn").textContent = "Loading...";
@@ -201,7 +236,9 @@ function addEventToGetCurrentLocationWeather() {
 
 
 // Event Listener on Search City Input and Button ;
-function addEventToGetWeatherDataByCityName() {
+// add click event on Search City Button to read input search
+
+function addClickEvent2() {
   document.getElementById("search_by_city").addEventListener("click", () => {
     document.getElementById("search_by_city").disabled = true;
     document.getElementById("search_by_city").textContent = "Loading...";
@@ -216,13 +253,37 @@ function addEventToGetWeatherDataByCityName() {
     addRecent(input.value);
     // document.getElementById('curr_loc_btn').textContent = "Loading..";
   });
+
+
+  document.getElementById("initiate_search").addEventListener("click", () => {
+    document.getElementById("initiate_search").disabled = true;
+    // document.getElementById("search_by_city").textContent = "Loading...";
+
+    setTimeout(() => {
+      document.getElementById("initiate_search").disabled = false;
+    }, 1000 * 5);
+    getCityWeather();
+
+    const input = document.getElementById("input_city_name");
+
+    addRecent(input.value);
+    // document.getElementById('curr_loc_btn').textContent = "Loading..";
+  });
+
+  
+
+
+  
 }
 
 // Search by City 
 
   // ------------------- UTILITY FUNCTIONS -----------------------
 
-  function searchAreaChangeOutline() {
+
+  // adds focus event on city search input to change input outline style
+// adds blur event on city search input to change input outline style
+  function addFocusAndBlurEvent() {
     // On focus
     document.getElementById("input_city_name").addEventListener("focus", () => {
       document
@@ -242,6 +303,8 @@ function addEventToGetWeatherDataByCityName() {
 
 // IT TOGGLES THE RECENT SEARCH BOX WHICH APPEARS ON INPUT FOCUS AND HIDE ON BLUR.
 
+// adds focus event on city search input and allow user to select recent searches
+// add blur event on city search input and close recent search box 
 function toggleRecentBox() {
   document.getElementById("input_city_name").addEventListener("focus", () => {
     document.getElementById("recent_city_dropdown").classList.remove("hidden");
@@ -266,6 +329,26 @@ function toggleUnitBtn() {
     element.classList.add("bg-blue-500", "text-white");
   });
 }
+
+// Width Calculation
+
+function setWidthSearchBox(){
+  const width = document.getElementById('search_area').offsetWidth;
+
+  document.getElementById("recent_city_dropdown").style.width = width + "px" ;
+}
+
+// Date convertion
+function getDateMonth(dateStr) {
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  const [year, month, day] = dateStr.split("-");
+
+  return `${day} ${months[month - 1]}`;
+}
+
+console.log(getDateMonth("2026-03-10"));
+// Output: 10 Mar
 
 //Celsius (°C) to Fahrenheit (°F),
 
@@ -309,7 +392,8 @@ function unClickBtn(element_class) {
 }
 
 // IT ADDS EFFECT OF CLICKED AND ACTIVE
-function clickUtilityBtn() {
+
+function addClickEvent3() {
   document.getElementById("btn-f-container").addEventListener("click", (e) => {
     const element = e.target.closest(".btn-f-utility");
     if (!element) return;
@@ -399,7 +483,7 @@ function renderForecast(data) {
 
       <!-- date -->
       <h3 class="font-semibold text-sm text-gray-700">
-        ${day.date}
+        ${ getDateMonth(day.date)}
       </h3>
 
       <!-- weather icon -->
@@ -483,12 +567,16 @@ function closeMessageBox() {
 
 // ------------------- RECENT SEARCH BOX FUNCTIONS ------------------------
 
-function showRecentSearch() {
+
+// render the recent search list into Recent Search Box
+// it works only when user clicks on input search
+
+function render5RecentSearches() {
   const box = document.getElementById("recent_search_box");
 
   box.innerHTML = ""; // clearing previous list ;
 
-  if (recent_search_list.length === 0) {
+  if (recent_search_list.length === 0) { // avoid empty list display
     //
     box.classList.add("hidden");
     return;
@@ -546,7 +634,7 @@ function addRecent(value) {
 
   setDataLS("recent_search_list", recent_search_list);
 
-  showRecentSearch();
+  render5RecentSearches();
 }
 
 //// when user clicks recent item
@@ -559,7 +647,7 @@ function selectRecent(value) {
 function removeRecent(index) {
   recent_search_list.splice(index, 1);
 
-  showRecentSearch();
+  render5RecentSearches();
 }
 
 // ----------------- X ------------------ X ------------------------
@@ -567,7 +655,7 @@ function removeRecent(index) {
 // -------------------- DEFAULT ACTIONS -------------------------
 
 // IT INITIALIZES THE DEFAULT EFFECTS ON TODAYS BUTTON
-function initDefaultActions() {
+function ChangeButtonsToClickedButtons() {
   // Initializing Click effect on Today button , by default
   document.getElementById("btn_today").classList.remove("bg-gray-300", "text-gray-600");
   document.getElementById("btn_today")

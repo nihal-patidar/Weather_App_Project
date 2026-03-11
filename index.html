@@ -43,13 +43,14 @@
               class="capitalize px-4 py-1 focus:outline-none"
               id="input_city_name"
               placeholder="Enter the city Name"
+              autocomplete="off"
             />
-            <i class="fa-solid fa-bars text-xl" id="drop_down_bar"></i>
+            <i class="fa-solid fa-arrow-right" id="initiate_search"></i>
           </div>
           <!-- recent search box -->
           <div
             id="recent_city_dropdown"
-            class=" w-80 hidden absolute top-10 z-50"
+            class=" hidden absolute top-10 z-50"
           >
             <div
               id="recent_search_box"
@@ -257,7 +258,7 @@
         <!-- Extended Forecast Section -->
         <div class="w-full mt-6">
           <!-- heading -->
-          <h2 class="text-xl font-semibold mb-4">5 Day Forecast</h2>
+          <h2 class="text-xl font-semibold mb-4 w-fit mx-auto italic text-gray-600 "><strong>5 Day Forecast</strong></h2>
 
           <!-- forecast grid -->
           <div
