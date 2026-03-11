@@ -33,3 +33,10 @@ A sophisticated, responsive weather application developed to meet the comprehens
     * Weather-specific icons for intuitive data reading.
     * Dynamic **text coloring** for temperature values based on heat intensity.
 * **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
+
+### **4. Error Handling & Validation (20 Marks)**
+* **Custom Notifications**: Replaces standard JavaScript `alert()` with polished, UI-friendly message boxes for API errors or empty queries.
+* **Extreme Weather Alerts**: Built-in logic to trigger custom alerts when temperatures exceed 40°C.
+* **Input Validation**: Prevents invalid API calls by validating user input before processing.
+
+---
