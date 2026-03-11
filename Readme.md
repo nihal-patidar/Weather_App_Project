@@ -24,3 +24,12 @@ A sophisticated, responsive weather application developed to meet the comprehens
     * Dynamic **text coloring** for temperature values based on heat intensity.
 * **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
 * **Temperature Alert**: Alert message will be appear when temperature goes  **above 40°**.
+
+
+### **3. Extended 5-Day Forecast**
+* **Detailed Daily Cards**: Provides a breakdown of Date, Temperature, Wind Speed, and Humidity for the upcoming five days.
+* **Enhanced Readability**: Each forecast card uses relevant icons and organized layouts for quick data consumption.
+* **Visual Indicators**: 
+    * Weather-specific icons for intuitive data reading.
+    * Dynamic **text coloring** for temperature values based on heat intensity.
+* **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
