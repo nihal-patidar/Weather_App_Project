@@ -14,3 +14,13 @@ A sophisticated, responsive weather application developed to meet the comprehens
 **Search History Dropdown**: Dynamic dropdown menu utilizing local/session storage to store and revisit recently searched cities.
 
 **Interactive Controls**: Includes dedicated buttons for manual searching and refreshing current location data.
+
+
+### **2. Intelligent UI & Dynamic Styling**
+* **Adaptive Icons**: The interface background dynamically changes based on weather conditions (e.g., transitions to a rainy **icons** during precipitation).
+* **Responsive Design**: Meticulously crafted using **Tailwind CSS** to ensure a seamless experience across **Desktop, iPad Mini, and iPhone SE.**
+* **Visual Indicators**: 
+    * Weather-specific icons for intuitive data reading.
+    * Dynamic **text coloring** for temperature values based on heat intensity.
+* **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
+* **Temperature Alert**: Alert message will be appear when temperature goes  **above 40°**.
