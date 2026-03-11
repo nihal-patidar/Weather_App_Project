@@ -47,3 +47,12 @@ A sophisticated, responsive weather application developed to meet the comprehens
 * **Logic**: JavaScript 
 * **Version Control**: Git and Github
 ---
+
+## 📂 Project Structure
+* `index.html`: Primary application entry point.
+* `input.css`: Tailwind source styles.
+* `output.css`: Compiled Tailwind utility classes.
+* `index-org.js`: Core logic, API integration, and DOM manipulation.
+* `README.md`: Project documentation and setup instructions.
+
+---
