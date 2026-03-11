@@ -56,3 +56,13 @@ A sophisticated, responsive weather application developed to meet the comprehens
 * `README.md`: Project documentation and setup instructions.
 
 ---
+
+## ⚙️ Installation & Setup
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/nihal-patidar/Weather_App_Project.git
+
+2. **Navigate to Project Directory:**
+
+    ```
+    cd Weather_App_Project
