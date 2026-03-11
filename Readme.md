@@ -66,3 +66,21 @@ A sophisticated, responsive weather application developed to meet the comprehens
 
     ```
     cd Weather_App_Project
+
+
+
+## **Learning Outcomes**
+
+This project demonstrates:
+
+* JavaScript DOM manipulation
+
+* API integration for real-time weather data
+
+* Use of browser Geolocation API
+
+* Responsive UI design using Tailwind CSS
+
+* Dynamic UI updates based on API responses
+
+* Implementation of interactive web components
