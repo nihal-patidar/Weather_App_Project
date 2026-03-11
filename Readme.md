@@ -40,3 +40,10 @@ A sophisticated, responsive weather application developed to meet the comprehens
 * **Input Validation**: Prevents invalid API calls by validating user input before processing.
 
 ---
+
+## 🛠️ Tech Stack
+* **Markup**: HTML5
+* **Styling**: Tailwind CSS and CSS
+* **Logic**: JavaScript 
+* **Version Control**: Git and Github
+---
