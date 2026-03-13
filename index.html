@@ -22,270 +22,289 @@
     <link rel="stylesheet" href="input.css" />
   </head>
   <body>
+    <div
+      class="flex items-center justify-center min-h-screen w-full overflow-x-hidden"
+    >
+      <!-- Innner Main-->
+      <div class="w-full p-2 min-h-screen">
 
-    
-    <div class="flex items-center justify-center min-h-screen w-full overflow-x-hidden"
-  >
-    <!-- Innner Main-->
-    <div class="w-full p-2 min-h-screen">
-      <!-- Header -->
-      <h1 class="text-2xl font-bold italic text-gray-600 text-center p-4 mb-6">
-        <strong>Weather DashBoard</strong>
-      </h1>
+        <!-- Header and Search Functionality -->
+        <header>
+        <h1
+          class="text-2xl font-bold italic text-gray-600 text-center p-4 mb-6"
+        >
+          <strong>Weather DashBoard</strong>
+        </h1>
 
-      <div class="flex flex-col gap-4">
-        <!-- Search Area Header-->
-        <div class="flex flex-col md:flex-row gap-2 relative w-fit mx-auto">
-          <!-- <label for="city_name">Enter a city Name</label> -->
-          <div
-            class="outline-2 flex justify-between items-center outline-cyan-500 py-1 px-2 rounded-xl text-cyan-500 font-semibold"
-            id="search_area"
-          >
-            <input
-              class="capitalize px-4 py-1 focus:outline-none"
-              id="input_city_name"
-              placeholder="Enter the city Name"
-              autocomplete="off"
-            />
-            <i class="fa-solid fa-arrow-right" id="initiate_search"></i>
-          </div>
-          <!-- recent search box -->
-          <div id="recent_city_dropdown" class="hidden absolute top-10 z-50">
+        <div class="flex flex-col gap-4">
+          <!-- Search Area Header-->
+          <div class="flex flex-col md:flex-row gap-2 relative w-fit mx-auto">
+            <!-- <label for="city_name">Enter a city Name</label> -->
             <div
-              id="recent_search_box"
-              class="flex flex-col gap-1 w-full h-full border rounded-md p-2 bg-white shadow-sm capitalize"
-            ></div>
+              class="outline-2 flex justify-between items-center outline-cyan-500 py-1 px-2 rounded-xl text-cyan-500 font-semibold"
+              id="search_area"
+            >
+              <input
+                class="capitalize px-4 py-1 focus:outline-none"
+                id="input_city_name"
+                placeholder="Enter the city Name"
+                autocomplete="off"
+              />
+              <i class="fa-solid fa-arrow-right" id="initiate_search"></i>
+            </div>
+            <!-- recent search box -->
+            <div id="recent_city_dropdown" class="hidden absolute top-10 z-50">
+              <div
+                id="recent_search_box"
+                class="flex flex-col gap-1 w-full h-full border rounded-md p-2 bg-white shadow-sm capitalize"
+              ></div>
+            </div>
+
+            <div class="flex gap-3 justify-between items-center text-blue-500">
+              <button
+                class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
+                id="search_by_city"
+              >
+                <i class="fa-solid fa-arrow-right"></i> Search
+              </button>
+              <i class="fa-solid">OR</i>
+              <button
+                class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
+                id="curr_loc_btn"
+              >
+                <i class="fa-solid fa-location-crosshairs"></i> Current Location
+              </button>
+            </div>
           </div>
 
-          <div class="flex gap-3 justify-between items-center text-blue-500">
-            <button
-              class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
-              id="search_by_city"
-            >
-              <i class="fa-solid fa-arrow-right"></i> Search
-            </button>
-            <i class="fa-solid">OR</i>
-            <button
-              class="bg-cyan-500 hover:bg-blue-500 rounded-xl text-center px-4 py-2 text-white font-bold w-fit"
-              id="curr_loc_btn"
-            >
-              <i class="fa-solid fa-location-crosshairs"></i> Current Location
-            </button>
-          </div>
-        </div>
+        </header>
 
         <!-- Todays Weather Information Section -->
-        <div class="flex flex-col w-full px-2 md:px-4 py-2">
-          <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
-          <div
-            class="flex justify-evenly md:justify-start items-center mb-4 rounded-md py-1 px-4 gap-0 md:gap-4"
-            id="btn-f-container"
-          >
-            <button
-              class="btn-f-utility bg-gray-300 text-gray-600"
-              id="btn_today"
-            >
-              Todays
-            </button>
-            <!--Shows that Current Dashboard shows todays weather Information -->
-            <button
-              class="btn-f-utility bg-gray-300 text-gray-600"
-              id="btn_tomorrow"
-            >
-              Tommorrow
-            </button>
-            <!-- User can click to view Tommorrow information -->
-            <!-- <button class="btn-f"> 5 Days </button> -->
-            <button class="btn-f-unit bg-gray-300 text-gray-600" id="btn_cel">
-              <sup>o</sup> C
-            </button>
-            <!-- User can toggle the between C and F -->
-            <button class="btn-f-unit bg-gray-300 text-gray-600" id="btn_fer">
-              <sup>o</sup> F
-            </button>
-          </div>
-
-          <!-- Weather Information Dashboard with Responsive Design -->
-          <!--Using Grid with 2 Rows & 4 Columns on mediuma and large Devices -->
-          <!-- Using Grid with 4 Rows & 2 Colums on Small Devices -->
-          <div
-            class="w-full grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
-            id="info_board"
-          >
-            <!-- First Item Show City Name , Weather Category like ( Rain, clear , snow ) and Temperature in celsius-->
+        <section id="weather_section">
+          <div class="flex flex-col w-full px-2 md:px-4 py-2">
+            <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
             <div
-              class="bg-gradient-to-br from-sky-500 to-blue-700 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80 shadow-md"
+              class="flex justify-evenly md:justify-start items-center mb-4 rounded-md py-1 px-4 gap-0 md:gap-4"
+              id="btn-f-container"
             >
-              <!-- <h2
+              <button
+                class="btn-f-utility bg-gray-300 text-gray-600"
+                id="btn_today"
+              >
+                Todays
+              </button>
+              <!--Shows that Current Dashboard shows todays weather Information -->
+              <button
+                class="btn-f-utility bg-gray-300 text-gray-600"
+                id="btn_tomorrow"
+              >
+                Tommorrow
+              </button>
+              <!-- User can click to view Tommorrow information -->
+              <!-- <button class="btn-f"> 5 Days </button> -->
+              <button class="btn-f-unit bg-gray-300 text-gray-600" id="btn_cel">
+                <sup>o</sup> C
+              </button>
+              <!-- User can toggle the between C and F -->
+              <button class="btn-f-unit bg-gray-300 text-gray-600" id="btn_fer">
+                <sup>o</sup> F
+              </button>
+            </div>
+
+            <!-- Weather Information Dashboard with Responsive Design -->
+            <!--Using Grid with 2 Rows & 4 Columns on mediuma and large Devices -->
+            <!-- Using Grid with 4 Rows & 2 Colums on Small Devices -->
+            <div
+              class="w-full grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
+              id="info_board"
+            >
+              <!-- First Item Show City Name , Weather Category like ( Rain, clear , snow ) and Temperature in celsius-->
+              <div
+                class="bg-gradient-to-br from-sky-500 to-blue-700 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80 shadow-md"
+              >
+                <!-- <h2
                 class="text-2xl font-bold capitalize text-white"
                 id="info_city_name"
               >
                 --
               </h2> -->
-              <div class="flex justify-between items-center">
-                <h2 id="info_city_name" class="text-3xl font-bold text-white">
+                <div class="flex justify-between items-center">
+                  <h2 id="info_city_name" class="text-3xl font-bold text-white">
+                    <span class="skeleton h-7 w-40 rounded block"></span>
+                  </h2>
+                  <span
+                    id="today_info_date"
+                    class="text-white/80 text-sm"
+                  ></span>
+                </div>
+
+                <!-- weather icon container -->
+                <div
+                  class="w-16 h-16 rounded-2xl flex justify-center items-center bg-white/30 backdrop-blur-sm"
+                  id="day_category"
+                >
+                  <i class="fa-solid fa-sun text-amber-200 text-4xl"></i>
+                </div>
+
+                <h3
+                  class="text-xl font-semibold capitalize text-white flex items-center gap-2"
+                  id="info_weather_category"
+                >
                   <span class="skeleton h-7 w-40 rounded block"></span>
-                </h2>
-                <span id="today_info_date" class="text-white/80 text-sm"></span>
+                </h3>
+
+                <h1
+                  class="text-4xl font-bold capitalize flex items-center gap-2"
+                  id="temt-space"
+                >
+                  <span id="info_weather_temp" class="temp_value text-white"
+                    ><span class="skeleton h-7 w-40 rounded block"></span
+                  ></span>
+                  <span class="temp_unit text-white">°C</span>
+                </h1>
               </div>
 
-              <!-- weather icon container -->
+              <!-- Second Item Show Details about Wind like (Speed , Direction) -->
+              <!-- Grid Item for Weather Data For Wind -->
+              <!-- Grid Item for Weather Data For Wind -->
               <div
-                class="w-16 h-16 rounded-2xl flex justify-center items-center bg-white/30 backdrop-blur-sm"
-                id="day_category"
+                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
               >
-                <i class="fa-solid fa-sun text-amber-200 text-4xl"></i>
+                <!-- heading section for wind -->
+                <h2
+                  class="flex items-center justify-between text-lg font-semibold text-white"
+                >
+                  <span>Wind Speed</span>
+                  <!-- wind icon -->
+                  <i class="fa-solid fa-wind text-cyan-200"></i>
+                </h2>
+
+                <!-- wind data -->
+                <div
+                  class="flex flex-col gap-2 text-sm md:text-xl text-gray-100"
+                >
+                  <h2>
+                    <span id="info_wind_speed" class="font-medium"
+                      ><span class="skeleton h-7 w-40 rounded block"></span
+                    ></span>
+                    <span class="opacity-80 text-sm"> m/s</span>
+                  </h2>
+                </div>
               </div>
 
-              <h3
-                class="text-xl font-semibold capitalize text-white flex items-center gap-2"
-                id="info_weather_category"
+              <!-- Grid Item for Weather Data For Humidity -->
+              <div
+                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
               >
-                <span class="skeleton h-7 w-40 rounded block"></span>
-              </h3>
-
-              <h1
-                class="text-4xl font-bold capitalize flex items-center gap-2"
-                id="temt-space"
-              >
-                <span id="info_weather_temp" class="temp_value text-white"
-                  ><span class="skeleton h-7 w-40 rounded block"></span
-                ></span>
-                <span class="temp_unit text-white">°C</span>
-              </h1>
-            </div>
-
-            <!-- Second Item Show Details about Wind like (Speed , Direction) -->
-            <!-- Grid Item for Weather Data For Wind -->
-            <!-- Grid Item for Weather Data For Wind -->
-            <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-            >
-              <!-- heading section for wind -->
-              <h2
-                class="flex items-center justify-between text-lg font-semibold text-white"
-              >
-                <span>Wind Speed</span>
-                <!-- wind icon -->
-                <i class="fa-solid fa-wind text-cyan-200"></i>
-              </h2>
-
-              <!-- wind data -->
-              <div class="flex flex-col gap-2 text-sm md:text-xl text-gray-100">
-                <h2>
-                  <span id="info_wind_speed" class="font-medium"
-                    ><span class="skeleton h-7 w-40 rounded block"></span
-                  ></span>
-                  <span class="opacity-80 text-sm"> m/s</span>
+                <!-- heading -->
+                <h2
+                  class="flex items-center justify-between text-lg font-semibold text-white"
+                >
+                  <span>Humidity</span>
+                  <!-- humidity icon -->
+                  <i class="fa-solid fa-droplet text-blue-300"></i>
                 </h2>
+
+                <!-- humidity value -->
+                <div class="text-sm md:text-xl text-gray-100">
+                  <h2>
+                    <span id="info_humidity_value" class="font-medium"
+                      ><span class="skeleton h-7 w-40 rounded block"></span
+                    ></span>
+                    <span class="opacity-80">%</span>
+                  </h2>
+                </div>
               </div>
-            </div>
 
-            <!-- Grid Item for Weather Data For Humidity -->
-            <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-            >
-              <!-- heading -->
-              <h2
-                class="flex items-center justify-between text-lg font-semibold text-white"
+              <!-- Grid Item for Weather Data For Pressure -->
+              <div
+                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
               >
-                <span>Humidity</span>
-                <!-- humidity icon -->
-                <i class="fa-solid fa-droplet text-blue-300"></i>
-              </h2>
-
-              <!-- humidity value -->
-              <div class="text-sm md:text-xl text-gray-100">
-                <h2>
-                  <span id="info_humidity_value" class="font-medium"
-                    ><span class="skeleton h-7 w-40 rounded block"></span
-                  ></span>
-                  <span class="opacity-80">%</span>
+                <!-- heading -->
+                <h2
+                  class="flex items-center justify-between text-lg font-semibold text-white"
+                >
+                  <span>Pressure</span>
+                  <!-- pressure icon -->
+                  <i class="fa-solid fa-gauge text-purple-300"></i>
                 </h2>
+
+                <!-- pressure value -->
+                <div class="text-sm text-gray-100">
+                  <h2>
+                    <span
+                      id="info_pressure_value"
+                      class="font-medium md:text-xl"
+                      ><span class="skeleton h-7 w-40 rounded block"></span
+                    ></span>
+                    <span class="opacity-80">hPa</span>
+                  </h2>
+                </div>
               </div>
-            </div>
 
-            <!-- Grid Item for Weather Data For Pressure -->
-            <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-            >
-              <!-- heading -->
-              <h2
-                class="flex items-center justify-between text-lg font-semibold text-white"
+              <!-- Grid Item for Weather Data For Temperature -->
+              <div
+                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
               >
-                <span>Pressure</span>
-                <!-- pressure icon -->
-                <i class="fa-solid fa-gauge text-purple-300"></i>
-              </h2>
-
-              <!-- pressure value -->
-              <div class="text-sm text-gray-100">
-                <h2>
-                  <span id="info_pressure_value" class="font-medium md:text-xl"
-                    ><span class="skeleton h-7 w-40 rounded block"></span
-                  ></span>
-                  <span class="opacity-80">hPa</span>
-                </h2>
-              </div>
-            </div>
-
-            <!-- Grid Item for Weather Data For Temperature -->
-            <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-            >
-              <!-- heading -->
-              <h2
-                class="flex items-center justify-between text-lg font-semibold text-white"
-              >
-                <span>Temperature</span>
-                <!-- temperature icon -->
-                <i class="fa-solid fa-temperature-half text-orange-300"></i>
-              </h2>
-
-              <!-- temperature values -->
-              <div class="flex flex-col gap-2 text-sm md:text-xl text-gray-100">
-                <!-- min temperature -->
-                <h2>
-                  <span class="opacity-80">Min :</span>
-                  <span id="info_min_temp" class="font-medium temp_value"
-                    ><span class="skeleton h-7 w-40 rounded block"></span
-                  ></span>
-                  <span class="temp_unit">°C</span>
+                <!-- heading -->
+                <h2
+                  class="flex items-center justify-between text-lg font-semibold text-white"
+                >
+                  <span>Temperature</span>
+                  <!-- temperature icon -->
+                  <i class="fa-solid fa-temperature-half text-orange-300"></i>
                 </h2>
 
-                <!-- max temperature -->
-                <h2>
-                  <span class="opacity-80">Max :</span>
-                  <!-- removed extra space in id -->
-                  <span id="info_max_temp" class="font-medium temp_value"
-                    ><span class="skeleton h-7 w-40 rounded block"></span
-                  ></span>
-                  <span class="temp_unit">°C</span>
-                </h2>
+                <!-- temperature values -->
+                <div
+                  class="flex flex-col gap-2 text-sm md:text-xl text-gray-100"
+                >
+                  <!-- min temperature -->
+                  <h2>
+                    <span class="opacity-80">Min :</span>
+                    <span id="info_min_temp" class="font-medium temp_value"
+                      ><span class="skeleton h-7 w-40 rounded block"></span
+                    ></span>
+                    <span class="temp_unit">°C</span>
+                  </h2>
+
+                  <!-- max temperature -->
+                  <h2>
+                    <span class="opacity-80">Max :</span>
+                    <!-- removed extra space in id -->
+                    <span id="info_max_temp" class="font-medium temp_value"
+                      ><span class="skeleton h-7 w-40 rounded block"></span
+                    ></span>
+                    <span class="temp_unit">°C</span>
+                  </h2>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
+        </section>
+        
         <!-- Extended Forecast Section -->
-        <div class="w-full mt-6 px-4">
-          <!-- heading -->
-          <h2
-            class="text-xl font-semibold mb-4 w-fit mx-auto italic text-gray-600"
-          >
-            <strong>5 Day Forecast</strong>
-          </h2>
+        <section id="forecast_section">
+          <div class="w-full mt-6 px-4">
+            <!-- heading -->
+            <h2
+              class="text-xl font-semibold mb-4 w-fit mx-auto italic text-gray-600"
+            >
+              <strong>5 Day Forecast</strong>
+            </h2>
 
-          <!-- forecast grid -->
-          <div
-            id="forecast_container"
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
-          >
-            <!-- Each Card will appear here-->
+            <!-- forecast grid -->
+            <div
+              id="forecast_container"
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+            >
+              <!-- Each Card will appear here-->
+            </div>
           </div>
+        </section>
+
         </div>
       </div>
-    </div>
     </div>
 
     <!-- Message Box Container -->
@@ -320,11 +339,7 @@
       </button>
     </div>
 
-
-
-    <footer
-      class="mt-10 text-gray italic rounded-t-2xl shadow-lg"
-    >
+    <footer class="mt-10 text-gray italic rounded-t-2xl shadow-lg">
       <div
         class="max-w-6xl mx-auto px-6 py-8 flex flex-col text-center justify-between items-center gap-6"
       >
@@ -339,8 +354,8 @@
         <!-- Links -->
         <div class="flex items-center gap-6 text-sm text-gray-600 italic">
           <a href="#" class="hover:text-black transition">Home</a>
-          <a href="#" class="hover:text-black transition">Forecast</a>
-          <a href="#" class="hover:text-black transition">About</a>
+          <a href="#weather_section" class="hover:text-black transition">Forecast</a>
+          <a href="#forecast_section" class="hover:text-black transition">About</a>
         </div>
 
         <!-- Social / Credits -->
