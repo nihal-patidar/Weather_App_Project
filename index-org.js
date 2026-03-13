@@ -25,7 +25,7 @@ const apiKey = `95c3cff85637b75da8b956e35d554997`;
 let recent_search_list = getDataLS("recent_search_list");
 let weather = {};
 let fiveDayForcasts;
-let curr_city_search ;
+let curr_city_search;
 
 // Sets width of recent search box equal to width of search bar
 setWidthSearchBox();
@@ -56,21 +56,21 @@ addClickEvent2();
 addFocusAndBlurEvent();
 
 // adds focus event on city search input and allow user to select recent searches
-// add blur event on city search input and close recent search box 
+// add blur event on city search input and close recent search box
 toggleRecentBox();
 
 // adds click event to alter the temperature unit.
 toggleUnitBtn();
 
-// converts value 
+// converts value
 C_To_F_conversion();
 F_To_C_conversion();
 
-// add click event make button look like clicked 
-addClickEvent3()
+// add click event make button look like clicked
+addClickEvent3();
 
 // add resize event on window to set width recent search box.
-window.addEventListener('resize',setWidthSearchBox);
+window.addEventListener("resize", setWidthSearchBox);
 
 //----------------------------- API CALLS -----------------------------------
 
@@ -82,42 +82,126 @@ if (!recent_search_list) {
 
 // showMessageBox();
 
+function getCityWeather() {
+
+  // Get the city input element
+  const input = document.getElementById("input_city_name");
+
+  // Remove extra spaces from beginning and end
+  let city_name = input.value.trim();
+
+  // Store current searched city (used globally)
+  curr_city_search = city_name;
+
+  // Regex pattern allowing only letters, spaces and hyphen
+  const cityRegex = /^[a-zA-Z\s-]+$/;
 
 
-function getCityWeather(){
+  // Validation 1: Check if input field is empty
+  if (city_name === "") {
+    showMessageBox("error", "Please enter a city name");
+    input.focus();
+    return;
+  }
 
-    const input = document.getElementById('input_city_name');
 
-    const city_name = input.value ;
+  // Validation 2: Prevent very short city names
+  // Avoid invalid inputs like "a", "x"
+  if (city_name.length < 2) {
+    showMessageBox("error", "City name is too short");
+    input.focus();
+    return;
+  }
 
-    curr_city_search = city_name ;
 
-    if(city_name === ""){
-        alert('Please Enter City Name')
-        return ;
-    }
+  // Validation 3: Ensure city name contains only letters and spaces
+  // Blocks numbers and special characters like 123, @, #
+  if (!cityRegex.test(city_name)) {
+    showMessageBox("error", "City name should contain only letters and spaces");
+    input.focus();
+    return;
+  }
 
-    getCityWeatherApi(city_name);   
-    get5Dayforcast(city_name);
 
+  // Validation 4: Remove multiple spaces between words
+  // Example: "New     York" → "New York"
+  city_name = city_name.replace(/\s+/g, " ");
+
+  document.getElementById("search_by_city").disabled = true;
+  document.getElementById("search_by_city").textContent = "Loading...";
+  setTimeout(() => {
+      document.getElementById("search_by_city").disabled = false;
+    }, 1000 * 5);
+
+
+  // If all validations pass, call the weather APIs
+  getCityWeatherApi(city_name);
+  get5Dayforcast(city_name);
 }
 
 async function getCityWeatherApi(city) {
   try {
+
+    // Construct API URL with city name and API key
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=95c3cff85637b75da8b956e35d554997&units=metric`;
 
-    fetch(url).then(async (response) => {
-      const data = await response.json();
-      if (data) {
-        console.log("city weather", data);
-        weather = data;
-        document.getElementById("search_by_city").innerHTML = `<i class="fa-solid fa-arrow-right"></i> Search`;
+    // Send request to weather API
+    const response = await fetch(url);
 
-        setWeatherInfoToPanel(weather);
-      }
-    });
+    // Convert API response into JSON format
+    const data = await response.json();
+
+
+    // Validation 1: Check if city is invalid
+    // OpenWeather API returns cod = "404" when city is not found
+    if (data.cod === "404") {
+      document.getElementById("search_by_city").innerHTML =
+      `<i class="fa-solid fa-arrow-right"></i> Search`;
+      // Show message using custom message box
+      showMessageBox("error", "City not found. Please enter a valid city.");
+
+      // Stop further execution
+      return;
+    }
+
+
+    // Validation 2: Check if API response contains valid weather data
+    if (!data || !data.main) {
+document.getElementById("search_by_city").innerHTML =
+      `<i class="fa-solid fa-arrow-right"></i> Search`;
+      // If data is missing required fields, show error message
+      showMessageBox("error", "Unable to fetch weather data. Please try again.");
+
+      return;
+    }
+
+
+    // If valid city and data received successfully
+    console.log("city weather", data);
+
+    // Store weather data globally
+    weather = data;
+
+    
+
+    const input = document.getElementById("input_city_name");
+
+    addRecent(input.value);
+
+    // Reset search button text
+    document.getElementById("search_by_city").innerHTML =
+      `<i class="fa-solid fa-arrow-right"></i> Search`;
+
+    // Update weather UI panel with received data
+    setWeatherInfoToPanel(weather);
+
   } catch (err) {
+
+    // Validation 3: Handle network errors (no internet, API failure)
     console.log(err);
+
+    showMessageBox("alert", "Network error. Please check your internet connection.");
+
   }
 }
 
@@ -127,7 +211,6 @@ function getCurrentLocation() {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       getWeatherDataFromCoords(lat, lon);
-
     },
     (err) => {
       console.log("error", err.message);
@@ -143,9 +226,10 @@ function getWeatherDataFromCoords(lat, long) {
     if (data) {
       console.log("weather 3", data);
       weather = data;
-      document.getElementById("curr_loc_btn").innerHTML = `<i class="fa-solid fa-location-crosshairs"></i> Current Location`
-      curr_city_search = weather.name ;
-      get5Dayforcast(curr_city_search)
+      document.getElementById("curr_loc_btn").innerHTML =
+        `<i class="fa-solid fa-location-crosshairs"></i> Current Location`;
+      curr_city_search = weather.name;
+      get5Dayforcast(curr_city_search);
       setWeatherInfoToPanel(weather);
     }
   });
@@ -177,12 +261,20 @@ function setWeatherInfoToPanel(weather) {
   const weatherIcon = getWeatherIcon(weather.weather[0].main);
   const tempColor = getTempColor(weather.main.temp);
 
+  document.getElementById("temt-space").innerHTML = 
+  `
+  <span id="info_weather_temp" class="temp_value ${tempColor}"
+                  >Loading...</span
+                >
+                <span class="temp_unit ${tempColor}">°C</span>`;
+
   // setting main weather icon
   document.getElementById("day_category").innerHTML =
     `<i class="fa-solid ${weatherIcon} text-4xl"></i>`;
 
   // city name
-  document.getElementById("info_city_name").textContent = weather.name;
+  document.getElementById("info_city_name").innerHTML =  `${weather.name}
+                <span id="alert_sign"></span>`
 
   // weather type with icon
   document.getElementById("info_weather_category").innerHTML =
@@ -194,7 +286,7 @@ function setWeatherInfoToPanel(weather) {
 
   // wind speed
   document.getElementById("info_wind_speed").innerHTML =
-    `<i class="fa-solid fa-wind text-cyan-200"></i> ${weather.wind.speed} Km/h`;
+    `<i class="fa-solid fa-wind text-cyan-200"></i> ${weather.wind.speed}`;
 
   // humidity
   document.getElementById("info_humidity_value").innerHTML =
@@ -211,6 +303,15 @@ function setWeatherInfoToPanel(weather) {
   // max temperature
   document.getElementById("info_max_temp").innerHTML =
     `<i class="fa-solid fa-temperature-arrow-up text-red-200"></i> ${weather.main.temp_max}`;
+
+
+  if( weather.main.temp  >= 40){
+  // if(true){
+    document.getElementById('alert_sign').innerHTML = `<i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 alert-animate"></i>`
+    showMessageBox("alert","Temperature High Alert")
+  }
+
+
 }
 
 // ----------------- X ----------------------- X ----------------------------
@@ -233,27 +334,25 @@ function addClickEvent1() {
   });
 }
 
-
-
 // Event Listener on Search City Input and Button ;
 // add click event on Search City Button to read input search
 
 function addClickEvent2() {
   document.getElementById("search_by_city").addEventListener("click", () => {
-    document.getElementById("search_by_city").disabled = true;
-    document.getElementById("search_by_city").textContent = "Loading...";
-
-    setTimeout(() => {
-      document.getElementById("search_by_city").disabled = false;
-    }, 1000 * 5);
     getCityWeather();
 
-    const input = document.getElementById("input_city_name");
+    // document.getElementById("search_by_city").disabled = true;
+    // document.getElementById("search_by_city").textContent = "Loading...";
 
-    addRecent(input.value);
+    // setTimeout(() => {
+    //   document.getElementById("search_by_city").disabled = false;
+    // }, 1000 * 5);
+
+    // const input = document.getElementById("input_city_name");
+
+    // addRecent(input.value);
     // document.getElementById('curr_loc_btn').textContent = "Loading..";
   });
-
 
   document.getElementById("initiate_search").addEventListener("click", () => {
     document.getElementById("initiate_search").disabled = true;
@@ -269,42 +368,32 @@ function addClickEvent2() {
     addRecent(input.value);
     // document.getElementById('curr_loc_btn').textContent = "Loading..";
   });
-
-  
-
-
-  
 }
 
-// Search by City 
+// Search by City
 
-  // ------------------- UTILITY FUNCTIONS -----------------------
+// ------------------- UTILITY FUNCTIONS -----------------------
 
-
-  // adds focus event on city search input to change input outline style
+// adds focus event on city search input to change input outline style
 // adds blur event on city search input to change input outline style
-  function addFocusAndBlurEvent() {
-    // On focus
-    document.getElementById("input_city_name").addEventListener("focus", () => {
-      document
-        .getElementById("search_area")
-        .classList.remove("outline-cyan-500");
-      document.getElementById("search_area").classList.add("outline-blue-500");
-    });
+function addFocusAndBlurEvent() {
+  // On focus
+  document.getElementById("input_city_name").addEventListener("focus", () => {
+    document.getElementById("search_area").classList.remove("outline-cyan-500");
+    document.getElementById("search_area").classList.add("outline-blue-500");
+  });
 
-    // On Focus Out
-    document.getElementById("input_city_name").addEventListener("blur", () => {
-      document
-        .getElementById("search_area")
-        .classList.remove("outline-blue-500");
-      document.getElementById("search_area").classList.add("outline-cyan-500");
-    });
-  }
+  // On Focus Out
+  document.getElementById("input_city_name").addEventListener("blur", () => {
+    document.getElementById("search_area").classList.remove("outline-blue-500");
+    document.getElementById("search_area").classList.add("outline-cyan-500");
+  });
+}
 
 // IT TOGGLES THE RECENT SEARCH BOX WHICH APPEARS ON INPUT FOCUS AND HIDE ON BLUR.
 
 // adds focus event on city search input and allow user to select recent searches
-// add blur event on city search input and close recent search box 
+// add blur event on city search input and close recent search box
 function toggleRecentBox() {
   document.getElementById("input_city_name").addEventListener("focus", () => {
     document.getElementById("recent_city_dropdown").classList.remove("hidden");
@@ -332,15 +421,28 @@ function toggleUnitBtn() {
 
 // Width Calculation
 
-function setWidthSearchBox(){
-  const width = document.getElementById('search_area').offsetWidth;
+function setWidthSearchBox() {
+  const width = document.getElementById("search_area").offsetWidth;
 
-  document.getElementById("recent_city_dropdown").style.width = width + "px" ;
+  document.getElementById("recent_city_dropdown").style.width = width + "px";
 }
 
 // Date convertion
 function getDateMonth(dateStr) {
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   const [year, month, day] = dateStr.split("-");
 
@@ -373,16 +475,14 @@ function F_To_C_conversion() {
     document
       .querySelectorAll(".temp_unit")
       .forEach((element) => (element.textContent = "°C"));
-    
+
     get5Dayforcast(curr_city_search);
   });
-
-  
 }
 
 function celsiusToFahrenheit(celsius) {
-    return Math.round((celsius * 9) / 5 + 32);
-  }
+  return Math.round((celsius * 9) / 5 + 32);
+}
 // IT MAKE BUTTON UNCLICK OR MAKE BUTTON IN DEFAULT STATE
 function unClickBtn(element_class) {
   document.querySelectorAll(`.${element_class}`).forEach((element) => {
@@ -435,6 +535,22 @@ function getTempColor(temp) {
   return "text-red-500";
 }
 
+function getForecastBackground(weather) {
+  if (weather.includes("Clear")) {
+    return "bg-gradient-to-br from-sky-500 to-blue-700 before:bg-yellow-300/20";
+  }
+
+  if (weather.includes("Cloud")) {
+    return "bg-gradient-to-br from-sky-500 to-blue-700 before:bg-gray-300/20";
+  }
+
+  if (weather.includes("Rain")) {
+    return "bg-gradient-to-br from-sky-500 to-blue-700 before:bg-blue-300/20";
+  }
+
+  return "bg-gradient-to-br from-sky-500 to-blue-700";
+}
+
 // ----------------------- X ------------------ X ---------------------
 
 // ------------------- FORECAST SECTION FUNCTIONS ----------------------
@@ -466,7 +582,6 @@ function extractFiveDayForecast(list) {
 function renderForecast(data) {
   const container = document.getElementById("forecast_container");
 
-  // clearing previous cards
   container.innerHTML = "";
 
   data.forEach((day) => {
@@ -475,38 +590,48 @@ function renderForecast(data) {
 
     const card = document.createElement("div");
 
-    // improved contrast + cleaner card look
-    card.className =
-      "rounded-lg p-4 flex flex-col gap-3 bg-white shadow-md border border-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer";
+    const weatherBg = getForecastBackground(day.weather);
+
+    card.className = `
+      relative overflow-hidden
+      rounded-xl p-5 min-h-[170px]
+      flex flex-col gap-4
+      ${weatherBg}
+      text-white shadow-lg
+      transition-all duration-300
+      hover:scale-105 hover:shadow-2xl
+      cursor-pointer
+      before:absolute before:inset-0 before:blur-xl before:opacity-40 before:pointer-events-none
+    `;
 
     card.innerHTML = `
 
-      <!-- date -->
-      <h3 class="font-semibold text-sm text-gray-700">
-        ${ getDateMonth(day.date)}
+      <!-- Date -->
+      <h3 class="font-semibold text-sm text-white/80">
+        ${getDateMonth(day.date)}
       </h3>
 
-      <!-- weather icon -->
-      <div class="flex justify-center text-3xl">
-        <i class="fa-solid ${weatherIcon}"></i>
+      <!-- Weather Icon -->
+      <div class="flex justify-center text-4xl">
+        <i class="fa-solid ${weatherIcon}  weather-icon"></i>
       </div>
 
-      <!-- temperature -->
-      <div class="flex items-center gap-2 text-sm text-gray-700">
-        <i class="fa-solid fa-temperature-half text-orange-500"></i>
-        <span class="font-medium ${tempColor} temp_value">${day.temp}</span>
-        <span class="temp_unit">°C</span>
+      <!-- Temperature -->
+      <div class="flex items-center gap-2 text-lg">
+        <i class="fa-solid fa-temperature-half text-orange-300"></i>
+        <span class="font-bold ${tempColor} temp_value">${day.temp}</span>
+        <span class="temp_unit text-white/70">°C</span>
       </div>
 
-      <!-- wind -->
-      <div class="flex items-center gap-2 text-sm text-gray-700">
-        <i class="fa-solid fa-wind text-cyan-500"></i>
+      <!-- Wind -->
+      <div class="flex items-center gap-2 text-sm text-white/70">
+        <i class="fa-solid fa-wind text-cyan-200"></i>
         <span>${day.wind} km/h</span>
       </div>
 
-      <!-- humidity -->
-      <div class="flex items-center gap-2 text-sm text-gray-700">
-        <i class="fa-solid fa-droplet text-blue-500"></i>
+      <!-- Humidity -->
+      <div class="flex items-center gap-2 text-sm text-white/70">
+        <i class="fa-solid fa-droplet text-blue-200"></i>
         <span>${day.humidity}%</span>
       </div>
 
@@ -567,7 +692,6 @@ function closeMessageBox() {
 
 // ------------------- RECENT SEARCH BOX FUNCTIONS ------------------------
 
-
 // render the recent search list into Recent Search Box
 // it works only when user clicks on input search
 
@@ -576,7 +700,8 @@ function render5RecentSearches() {
 
   box.innerHTML = ""; // clearing previous list ;
 
-  if (recent_search_list.length === 0) { // avoid empty list display
+  if (recent_search_list.length === 0) {
+    // avoid empty list display
     //
     box.classList.add("hidden");
     return;
@@ -657,9 +782,12 @@ function removeRecent(index) {
 // IT INITIALIZES THE DEFAULT EFFECTS ON TODAYS BUTTON
 function ChangeButtonsToClickedButtons() {
   // Initializing Click effect on Today button , by default
-  document.getElementById("btn_today").classList.remove("bg-gray-300", "text-gray-600");
-  document.getElementById("btn_today")
-.classList.add("bg-blue-500", "text-white");
+  document
+    .getElementById("btn_today")
+    .classList.remove("bg-gray-300", "text-gray-600");
+  document
+    .getElementById("btn_today")
+    .classList.add("bg-blue-500", "text-white");
 
   // Initializing Click effect on Celsius Button
 

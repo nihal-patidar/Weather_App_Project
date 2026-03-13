@@ -84,3 +84,19 @@ This project demonstrates:
 * Dynamic UI updates based on API responses
 
 * Implementation of interactive web components
+
+
+
+## **Screenshots of Work**
+1. **Home Screen (Current Location Weather)**
+
+Displays the current weather of the user's detected location.
+![Home Screen](screenshots/ss-1.png)
+
+2. **City Weather Search**
+
+Users can search weather details for any city.
+![City Search]()
+3. Five Day Forecast
+
+Displays weather forecast including temperature, humidity and wind speed.

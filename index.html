@@ -22,10 +22,10 @@
     <link rel="stylesheet" href="input.css" />
   </head>
   <body
-    class="bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center min-h-screen w-full overflow-x-hidden "
+    class=" flex items-center justify-center min-h-screen w-full overflow-x-hidden "
   >
     <!-- Innner Main-->
-    <div class="w-full bg-white rounded-2xl p-2 min-h-screen">
+    <div class="w-full bg-gradient-to-b from-sky-100 via-blue-50 to-blue-100 rounded-2xl p-2 min-h-screen">
       <!-- Header -->
       <h1 class="text-2xl font-bold italic text-gray-600 text-center p-4 mb-6"><strong>Weather DashBoard</strong>
         
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Todays Weather Information Section -->
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full px-2 md:px-4 py-2">
           <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
           <div
             class="flex justify-evenly md:justify-start items-center bg-gray-100 rounded-md py-1 px-4 gap-0 md:gap-4"
@@ -110,12 +110,12 @@
           <!--Using Grid with 2 Rows & 4 Columns on mediuma and large Devices -->
           <!-- Using Grid with 4 Rows & 2 Colums on Small Devices -->
           <div
-            class="w-full bg-gray-200 grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
+            class="w-full  grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
             id="info_board"
           >
             <!-- First Item Show City Name , Weather Category like ( Rain, clear , snow ) and Temperature in celsius-->
             <div
-              class="bg-gradient-to-br from-cyan-400 to-sky-500 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80 shadow-md"
+              class="bg-gradient-to-br from-sky-500 to-blue-700 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80 shadow-md"
             >
               <h2
                 class="text-2xl font-bold capitalize text-white"
@@ -139,41 +139,43 @@
                 Loading...
               </h3>
 
-              <h1 class="text-4xl font-bold capitalize flex items-center gap-2">
+              <h1 class="text-4xl font-bold capitalize flex items-center gap-2 " id="temt-space">
                 <span id="info_weather_temp" class="temp_value text-white"
                   >Loading...</span
                 >
                 <span class="temp_unit text-white">°C</span>
               </h1>
+
+              
             </div>
 
             <!-- Second Item Show Details about Wind like (Speed , Direction) -->
             <!-- Grid Item for Weather Data For Wind -->
             <!-- Grid Item for Weather Data For Wind -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4  backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading section for wind -->
               <h2
                 class="flex items-center justify-between text-lg font-semibold text-white"
               >
-                <span>Wind</span>
+                <span>Wind Speed</span>
                 <!-- wind icon -->
                 <i class="fa-solid fa-wind text-cyan-200"></i>
               </h2>
 
               <!-- wind data -->
-              <div class="flex flex-col gap-2 text-sm text-gray-100">
+              <div class="flex flex-col gap-2 text-sm md:text-xl text-gray-100">
                 <h2>
-                  <span class="opacity-80">Speed :</span>
-                  <span id="info_wind_speed" class="font-medium"></span>
+                  <span id="info_wind_speed" class="font-medium "></span>
+                  <span class="opacity-80 text-sm"> m/s</span>
                 </h2>
               </div>
             </div>
 
             <!-- Grid Item for Weather Data For Humidity -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading -->
               <h2
@@ -185,7 +187,7 @@
               </h2>
 
               <!-- humidity value -->
-              <div class="text-sm text-gray-100">
+              <div class="text-sm md:text-xl text-gray-100">
                 <h2>
                   <span id="info_humidity_value" class="font-medium"></span>
                   <span class="opacity-80">%</span>
@@ -195,7 +197,7 @@
 
             <!-- Grid Item for Weather Data For Pressure -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading -->
               <h2
@@ -209,7 +211,7 @@
               <!-- pressure value -->
               <div class="text-sm text-gray-100">
                 <h2>
-                  <span id="info_pressure_value" class="font-medium"></span>
+                  <span id="info_pressure_value" class="font-medium md:text-xl"></span>
                   <span class="opacity-80">hPa</span>
                 </h2>
               </div>
@@ -217,7 +219,7 @@
 
             <!-- Grid Item for Weather Data For Temperature -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 bg-white/15 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading -->
               <h2
@@ -229,7 +231,7 @@
               </h2>
 
               <!-- temperature values -->
-              <div class="flex flex-col gap-2 text-sm text-gray-100">
+              <div class="flex flex-col gap-2 text-sm md:text-xl text-gray-100">
                 <!-- min temperature -->
                 <h2>
                   <span class="opacity-80">Min :</span>
@@ -273,26 +275,34 @@
 
     <!-- Message Box Container -->
     <div
-      id="message_box"
-      class="fixed top-6 right-6 hidden max-w-sm w-full rounded-md shadow-lg bg-white border-2 border-gray-200 p-4 flex items-start gap-3"
-    >
-      <!-- icon -->
-      <div id="message_icon" class="text-lg mt-1"></div>
+  id="message_box"
+  class="fixed top-6 right-6 hidden w-[340px] bg-yellow-200 border-l-4 border-red-500 shadow-2xl rounded-lg p-4 flex items-start gap-3 transition-all duration-300 animate-slide-in"
+>
+  <!-- icon -->
+  <div
+    id="message_icon"
+    class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 text-lg"
+  >
+    !
+  </div>
 
-      <!-- message content -->
-      <div class="flex-1">
-        <h3 id="message_title" class="font-semibold text-sm">Message</h3>
-        <p id="message_text" class="text-sm text-gray-600"></p>
-      </div>
+  <!-- message content -->
+  <div class="flex-1">
+    <h3 id="message_title" class="font-bold text-red-500">
+      Alert
+    </h3>
 
-      <!-- close button -->
-      <button
-        onclick="closeMessageBox()"
-        class="text-gray-400 hover:text-gray-600 text-sm"
-      >
-        ✕
-      </button>
-    </div>
+    <p id="message_text" class="text-sm font-semibold text-gray-600 mt-1 leading-relaxed"></p>
+  </div>
+
+  <!-- close button -->
+  <button
+    onclick="closeMessageBox()"
+    class="text-gray-400 hover:text-gray-700 text-lg font-semibold"
+  >
+    ×
+  </button>
+</div>
 
     <!-- <script src="getApiData.js"></script> -->
     <!-- <script src="searchBar.js"></script> -->
