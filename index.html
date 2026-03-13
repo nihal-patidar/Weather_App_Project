@@ -21,14 +21,16 @@
     <link rel="icon" href="images/logo-2.jpg" />
     <link rel="stylesheet" href="input.css" />
   </head>
-  <body
-    class=" flex items-center justify-center min-h-screen w-full overflow-x-hidden "
+  <body>
+
+    
+    <div class="flex items-center justify-center min-h-screen w-full overflow-x-hidden"
   >
     <!-- Innner Main-->
-    <div class="w-full bg-gradient-to-b from-sky-100 via-blue-50 to-blue-100 rounded-2xl p-2 min-h-screen">
+    <div class="w-full p-2 min-h-screen">
       <!-- Header -->
-      <h1 class="text-2xl font-bold italic text-gray-600 text-center p-4 mb-6"><strong>Weather DashBoard</strong>
-        
+      <h1 class="text-2xl font-bold italic text-gray-600 text-center p-4 mb-6">
+        <strong>Weather DashBoard</strong>
       </h1>
 
       <div class="flex flex-col gap-4">
@@ -48,10 +50,7 @@
             <i class="fa-solid fa-arrow-right" id="initiate_search"></i>
           </div>
           <!-- recent search box -->
-          <div
-            id="recent_city_dropdown"
-            class=" hidden absolute top-10 z-50"
-          >
+          <div id="recent_city_dropdown" class="hidden absolute top-10 z-50">
             <div
               id="recent_search_box"
               class="flex flex-col gap-1 w-full h-full border rounded-md p-2 bg-white shadow-sm capitalize"
@@ -79,7 +78,7 @@
         <div class="flex flex-col w-full px-2 md:px-4 py-2">
           <!-- Utility Function like Unit Toggle , Open 5 Day Forcast , Tomorrow and Yesterday Visit -->
           <div
-            class="flex justify-evenly md:justify-start items-center bg-gray-100 rounded-md py-1 px-4 gap-0 md:gap-4"
+            class="flex justify-evenly md:justify-start items-center mb-4 rounded-md py-1 px-4 gap-0 md:gap-4"
             id="btn-f-container"
           >
             <button
@@ -110,19 +109,25 @@
           <!--Using Grid with 2 Rows & 4 Columns on mediuma and large Devices -->
           <!-- Using Grid with 4 Rows & 2 Colums on Small Devices -->
           <div
-            class="w-full  grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
+            class="w-full grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-1"
             id="info_board"
           >
             <!-- First Item Show City Name , Weather Category like ( Rain, clear , snow ) and Temperature in celsius-->
             <div
               class="bg-gradient-to-br from-sky-500 to-blue-700 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80 shadow-md"
             >
-              <h2
+              <!-- <h2
                 class="text-2xl font-bold capitalize text-white"
                 id="info_city_name"
               >
-                City Loading...
-              </h2>
+                --
+              </h2> -->
+              <div class="flex justify-between items-center">
+                <h2 id="info_city_name" class="text-3xl font-bold text-white">
+                  <span class="skeleton h-7 w-40 rounded block"></span>
+                </h2>
+                <span id="today_info_date" class="text-white/80 text-sm"></span>
+              </div>
 
               <!-- weather icon container -->
               <div
@@ -136,24 +141,25 @@
                 class="text-xl font-semibold capitalize text-white flex items-center gap-2"
                 id="info_weather_category"
               >
-                Loading...
+                <span class="skeleton h-7 w-40 rounded block"></span>
               </h3>
 
-              <h1 class="text-4xl font-bold capitalize flex items-center gap-2 " id="temt-space">
+              <h1
+                class="text-4xl font-bold capitalize flex items-center gap-2"
+                id="temt-space"
+              >
                 <span id="info_weather_temp" class="temp_value text-white"
-                  >Loading...</span
-                >
+                  ><span class="skeleton h-7 w-40 rounded block"></span
+                ></span>
                 <span class="temp_unit text-white">°C</span>
               </h1>
-
-              
             </div>
 
             <!-- Second Item Show Details about Wind like (Speed , Direction) -->
             <!-- Grid Item for Weather Data For Wind -->
             <!-- Grid Item for Weather Data For Wind -->
             <div
-              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4  backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+              class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
             >
               <!-- heading section for wind -->
               <h2
@@ -167,7 +173,9 @@
               <!-- wind data -->
               <div class="flex flex-col gap-2 text-sm md:text-xl text-gray-100">
                 <h2>
-                  <span id="info_wind_speed" class="font-medium "></span>
+                  <span id="info_wind_speed" class="font-medium"
+                    ><span class="skeleton h-7 w-40 rounded block"></span
+                  ></span>
                   <span class="opacity-80 text-sm"> m/s</span>
                 </h2>
               </div>
@@ -189,7 +197,9 @@
               <!-- humidity value -->
               <div class="text-sm md:text-xl text-gray-100">
                 <h2>
-                  <span id="info_humidity_value" class="font-medium"></span>
+                  <span id="info_humidity_value" class="font-medium"
+                    ><span class="skeleton h-7 w-40 rounded block"></span
+                  ></span>
                   <span class="opacity-80">%</span>
                 </h2>
               </div>
@@ -211,7 +221,9 @@
               <!-- pressure value -->
               <div class="text-sm text-gray-100">
                 <h2>
-                  <span id="info_pressure_value" class="font-medium md:text-xl"></span>
+                  <span id="info_pressure_value" class="font-medium md:text-xl"
+                    ><span class="skeleton h-7 w-40 rounded block"></span
+                  ></span>
                   <span class="opacity-80">hPa</span>
                 </h2>
               </div>
@@ -235,9 +247,8 @@
                 <!-- min temperature -->
                 <h2>
                   <span class="opacity-80">Min :</span>
-                  <span
-                    id="info_min_temp"
-                    class="font-medium temp_value"
+                  <span id="info_min_temp" class="font-medium temp_value"
+                    ><span class="skeleton h-7 w-40 rounded block"></span
                   ></span>
                   <span class="temp_unit">°C</span>
                 </h2>
@@ -246,9 +257,8 @@
                 <h2>
                   <span class="opacity-80">Max :</span>
                   <!-- removed extra space in id -->
-                  <span
-                    id="info_max_temp"
-                    class="font-medium temp_value"
+                  <span id="info_max_temp" class="font-medium temp_value"
+                    ><span class="skeleton h-7 w-40 rounded block"></span
                   ></span>
                   <span class="temp_unit">°C</span>
                 </h2>
@@ -258,9 +268,13 @@
         </div>
 
         <!-- Extended Forecast Section -->
-        <div class="w-full mt-6">
+        <div class="w-full mt-6 px-4">
           <!-- heading -->
-          <h2 class="text-xl font-semibold mb-4 w-fit mx-auto italic text-gray-600 "><strong>5 Day Forecast</strong></h2>
+          <h2
+            class="text-xl font-semibold mb-4 w-fit mx-auto italic text-gray-600"
+          >
+            <strong>5 Day Forecast</strong>
+          </h2>
 
           <!-- forecast grid -->
           <div
@@ -272,41 +286,90 @@
         </div>
       </div>
     </div>
+    </div>
 
     <!-- Message Box Container -->
     <div
-  id="message_box"
-  class="fixed top-6 right-6 hidden w-[340px] bg-yellow-200 border-l-4 border-red-500 shadow-2xl rounded-lg p-4 flex items-start gap-3 transition-all duration-300 animate-slide-in"
->
-  <!-- icon -->
-  <div
-    id="message_icon"
-    class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 text-lg"
-  >
-    !
-  </div>
+      id="message_box"
+      class="fixed top-6 right-6 hidden w-[340px] bg-yellow-200 border-l-4 border-red-500 shadow-2xl rounded-lg p-4 flex items-start gap-3 transition-all duration-300 animate-slide-in"
+    >
+      <!-- icon -->
+      <div
+        id="message_icon"
+        class="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 text-lg"
+      >
+        !
+      </div>
 
-  <!-- message content -->
-  <div class="flex-1">
-    <h3 id="message_title" class="font-bold text-red-500">
-      Alert
-    </h3>
+      <!-- message content -->
+      <div class="flex-1">
+        <h3 id="message_title" class="font-bold text-red-500">Alert</h3>
 
-    <p id="message_text" class="text-sm font-semibold text-gray-600 mt-1 leading-relaxed"></p>
-  </div>
+        <p
+          id="message_text"
+          class="text-sm font-semibold text-gray-600 mt-1 leading-relaxed"
+        ></p>
+      </div>
 
-  <!-- close button -->
-  <button
-    onclick="closeMessageBox()"
-    class="text-gray-400 hover:text-gray-700 text-lg font-semibold"
-  >
-    ×
-  </button>
-</div>
+      <!-- close button -->
+      <button
+        onclick="closeMessageBox()"
+        class="text-gray-400 hover:text-gray-700 text-lg font-semibold"
+      >
+        ×
+      </button>
+    </div>
+
+
+
+    <footer
+      class="mt-10 text-gray italic rounded-t-2xl shadow-lg"
+    >
+      <div
+        class="max-w-6xl mx-auto px-6 py-8 flex flex-col text-center justify-between items-center gap-6"
+      >
+        <!-- App Info -->
+        <div class="text-center">
+          <h2 class="text-xl font-bold tracking-wide">Weather Dashboard</h2>
+          <p class="text-gray-600 text-sm mt-1">
+            Real-time weather updates and 5-day forecasts.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div class="flex items-center gap-6 text-sm text-gray-600 italic">
+          <a href="#" class="hover:text-black transition">Home</a>
+          <a href="#" class="hover:text-black transition">Forecast</a>
+          <a href="#" class="hover:text-black transition">About</a>
+        </div>
+
+        <!-- Social / Credits -->
+        <div class="flex items-center gap-4 text-xl">
+          <a href="#" class="hover:scale-110 transition">
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a href="#" class="hover:scale-110 transition">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+
+          <a href="#" class="hover:scale-110 transition">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom Line -->
+      <div
+        class="border-t border-white/20 text-center py-3 text-sm text-gray-600"
+      >
+        © 2026 Weather Dashboard · Built with HTML, Tailwind & JavaScript
+      </div>
+    </footer>
 
     <!-- <script src="getApiData.js"></script> -->
     <!-- <script src="searchBar.js"></script> -->
     <!-- <script src="index.js"></script> -->
-     <script src="index-org.js"></script>
+    <script src="index-org.js"></script>
   </body>
 </html>
