@@ -276,6 +276,8 @@ function setWeatherInfoToPanel(weather) {
   document.getElementById("info_city_name").innerHTML =  `${weather.name}
                 <span id="alert_sign"></span>`
 
+
+
   // weather type with icon
   document.getElementById("info_weather_category").innerHTML =
     `<i class="fa-solid ${weatherIcon}"></i> ${weather.weather[0].main}`;
@@ -714,7 +716,7 @@ function render5RecentSearches() {
 
     // styling for each recent search row
     row.className =
-      "flex justify-between items-center px-3 py-1 border-b border-gray-200 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200 cursor-pointer";
+      "flex justify-between items-center px-3 py-1 border-b border-gray-200 hover:bg-blue-300 hover:text-gray-800 transition-colors duration-200 cursor-pointer";
 
     // clicking on row should select that city
     row.onclick = () => selectRecent(item);
