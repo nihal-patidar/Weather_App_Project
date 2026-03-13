@@ -33,11 +33,42 @@ A sophisticated, responsive weather application developed to meet the comprehens
     * Weather-specific icons for intuitive data reading.
     * Dynamic **text coloring** for temperature values based on heat intensity.
 * **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
-
 ### **4. Error Handling & Validation (20 Marks)**
-* **Custom Notifications**: Replaces standard JavaScript `alert()` with polished, UI-friendly message boxes for API errors or empty queries.
-* **Extreme Weather Alerts**: Built-in logic to trigger custom alerts when temperatures exceed 40°C.
-* **Input Validation**: Prevents invalid API calls by validating user input before processing.
+
+* **Custom Notifications**: Replaces standard JavaScript `alert()` with polished, UI-friendly message boxes for API errors or empty queries.  
+* **Extreme Weather Alerts**: Built-in logic to trigger custom alerts when temperatures exceed **40°C**.  
+* **Input Validation**: Prevents invalid API calls by validating user input before sending a request to the weather API.
+
+### Input City Validation
+
+* **Trim Spaces** - Removes extra spaces from the beginning and end of the city name.
+
+* **Empty Input Check** - Prevents search if the input field is empty.
+
+* **Minimum Length Validation** - Ensures the city name contains at least **2 characters**.
+
+* **Allowed Characters** - Allows only **letters, spaces, and hyphens** in the city name.
+
+* **Multiple Space Handling** - Replaces multiple spaces between words with a **single space**.
+
+* **Store Current City** - Saves the current searched city for global use in the application.
+---
+
+### API Response Validation
+
+* **City Not Found Handling** - Displays an error message when the API returns **404 (city not found)**.
+
+*  **Weather Data Check** - Ensures the API response contains required weather data fields.
+
+---
+
+### User Experience Improvements
+
+* **Disable Search Button** - Disables the search button while the API request is processing.
+
+* **Re-enable Button** - Re-enables the search button after the request is completed.
+
+* **Error Feedback** - Shows a clear error message if weather data cannot be fetched.
 
 ---
 
