@@ -77,6 +77,10 @@ A sophisticated, responsive weather application developed to meet the comprehens
 * **Styling**: Tailwind CSS and CSS
 * **Logic**: JavaScript 
 * **Version Control**: Git and Github
+
+## Tailwind Build
+
+    npx @tailwindcss/cli -i input.css -o output.css --watch
 ---
 
 ## 📂 Project Structure
@@ -119,15 +123,39 @@ This project demonstrates:
 
 
 ## **Screenshots of Work**
-1. **Home Screen (Current Location Weather)**
+### **Home Screen (Current Location Weather)**
 
-Displays the current weather of the user's detected location.
-![Home Screen](screenshots/ss-1.png)
+* Displays the current weather of the user's detected location.
+![Home Screen](screenshots/ss5.png)
 
-2. **City Weather Search**
 
-Users can search weather details for any city.
-![City Search]()
-3. Five Day Forecast
+### **Skeleton Loading UI**
+* Displays the loading skeleton until data loaded.
+![Skeleton Loader](screenshots/ss2.png)
 
-Displays weather forecast including temperature, humidity and wind speed.
+
+### **City Weather Search**
+
+* Users can search weather details for any city.
+![City Search](screenshots/ss12.png)
+
+
+### Five-Day Weather Forecast
+
+* Displays weather forecast including temperature, humidity and wind speed.
+
+![5 Day Forecasts](screenshots/ss1.png)
+
+
+### Tablet View (Medium Screen)
+
+* Demonstrates the responsive layout of the dashboard on medium-sized screens such as tablets and small laptop
+
+![Medium Screens](screenshots/ss8.png);
+
+
+### Mobile View (iPhone SE)
+
+* Illustrates the responsive design of the application on small mobile devices ensuring usability and readability.
+
+![Mobile Sizes](screenshots/ss10.png);
