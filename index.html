@@ -282,6 +282,65 @@
             </div>
           </div>
         </section>
+
+
+        <!-- View Hourly Forecast Button -->
+<div class="text-center mt-6">
+  <button
+    id="btn_hourly"
+    class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+  >
+    View Hourly Forecast
+  </button>
+</div>
+
+<!-- Hourly Forecast Section -->
+<section
+  id="hourly_section"
+  class="hidden bg-gradient-to-br from-sky-500 to-blue-700 mt-6 bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-lg mx-4"
+>
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-3">
+    <h2 class="text-lg sm:text-xl font-semibold text-white">
+      3 Hour Forecast
+    </h2>
+
+    <button
+      id="close_hourly"
+      class="text-red-400 hover:text-red-500 text-sm"
+    >
+      Close ✕
+    </button>
+  </div>
+
+  <!-- Scrollable Timeline -->
+<div class="relative">
+
+  <!-- LEFT BUTTON -->
+  <button
+    id="scroll_left"
+    class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full z-10"
+  >
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <!-- SCROLL AREA -->
+  <div
+    id="hourly_container"
+    class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide scroll-smooth"
+  >
+  </div>
+
+  <!-- RIGHT BUTTON -->
+  <button
+    id="scroll_right"
+    class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full z-10"
+  >
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+</div>
+</section>
         
         <!-- Extended Forecast Section -->
         <section id="forecast_section">
