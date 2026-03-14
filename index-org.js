@@ -36,7 +36,10 @@ ChangeButtonsToClickedButtons();
 
 // gets list of 40 predictions from open weather api
 // later extracts most relevant 5 predictions
-get5Dayforcast();
+// get5Dayforcast();
+
+// render 5 day card with skeleton loading UI until data is recieved.
+renderSkeletonForecast();
 
 // get the coordinates of user's current location
 getCurrentLocation();
@@ -213,7 +216,8 @@ function getCurrentLocation() {
       getWeatherDataFromCoords(lat, lon);
     },
     (err) => {
-      console.log("error", err.message);
+      showMessageBox('error',`${err.message}. Please check your location permission.`)
+      // console.log("error", err.message);
     },
   );
 }
@@ -643,6 +647,68 @@ function renderForecast(data) {
   });
 }
 
+// render skeleton cards until data is not recieved.
+function renderSkeletonForecast() {
+  const container = document.getElementById("forecast_container");
+
+  container.innerHTML = "";
+
+  for(let i = 0 ; i < 5 ; i++){
+    // const weatherIcon = getWeatherIcon(day.weather);
+    // const tempColor = getTempColor(day.temp);
+
+    const card = document.createElement("div");
+
+    // const weatherBg = getForecastBackground(day.weather);
+
+    card.className = `
+      relative overflow-hidden
+      rounded-xl p-5 min-h-[170px]
+      flex flex-col gap-4
+      text-white shadow-lg
+      bg-gradient-to-br from-sky-500 to-blue-700
+      transition-all duration-300
+      hover:scale-105 hover:shadow-2xl
+      cursor-pointer
+      before:absolute before:inset-0 before:blur-xl before:opacity-40 before:pointer-events-none
+    `;
+
+    card.innerHTML = `
+
+      <!-- Date -->
+      <h3 class="font-semibold text-sm text-white/80">
+       <span class="skeleton h-7 w-40 rounded block"></span>
+      </h3>
+
+      <!-- Weather Icon -->
+      <div class="flex justify-center text-4xl">
+        <i class="fa-solid  weather-icon">
+        <span class="skeleton h-7 w-40 rounded block"></span>
+        </i>
+      </div>
+
+      <!-- Temperature -->
+      <div class="flex items-center gap-2 text-lg">
+        <i class="fa-solid fa-temperature-half text-orange-300"></i>
+        <span class="font-bold temp_value">
+        <span class="skeleton h-7 w-40 rounded block"></span>
+        </span>
+        <span class="temp_unit text-white/70">°C</span>
+      </div>
+
+      <!-- Humidity -->
+      <div class="flex items-center gap-2 text-sm text-white/70">
+        <i class="fa-solid fa-droplet text-blue-200"></i>
+        <span>
+        <span class="skeleton h-7 w-40 rounded block"></span>
+        </span>
+      </div>
+
+    `;
+
+    container.appendChild(card);
+  }
+}
 // ------------------- X -------------------- X ----------------------------
 
 // ----------------------- MESSAGE BOX --------------------------------
