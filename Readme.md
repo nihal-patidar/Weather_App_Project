@@ -2,7 +2,11 @@
 
 A sophisticated, responsive weather application developed to meet the comprehensive requirements of the ** Weather Forecast Project**. This application provides real-time meteorological data, location-based tracking, and extended forecasts with a focus on UI creativity and robust error handling.
 
+## **Live Demo**
 
+* **Deployed Application**: [View Live Weather App](YOUR_DEPLOYED_LINK)
+
+* **GitHub Repository**: [View Source Code](https://github.com/nihal-patidar/Weather_App_Project.git)
 
 ## 🚀 Key Features
 
@@ -25,7 +29,6 @@ A sophisticated, responsive weather application developed to meet the comprehens
 * **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
 * **Temperature Alert**: Alert message will be appear when temperature goes  **above 40°**.
 
-
 ### **3. Extended 5-Day Forecast**
 * **Detailed Daily Cards**: Provides a breakdown of Date, Temperature, Wind Speed, and Humidity for the upcoming five days.
 * **Enhanced Readability**: Each forecast card uses relevant icons and organized layouts for quick data consumption.
@@ -33,7 +36,29 @@ A sophisticated, responsive weather application developed to meet the comprehens
     * Weather-specific icons for intuitive data reading.
     * Dynamic **text coloring** for temperature values based on heat intensity.
 * **Unit Conversion**: Integrated **°C/°F toggle** for the current dashboard temperature.
-### **4. Error Handling & Validation (20 Marks)**
+
+### **4. Hourly Forecast Timeline**
+
+* **3-Hour Predictions**: Shows weather updates at **3-hour intervals** using forecast API data.
+
+* **Horizontal Timeline**: Forecast cards are displayed in a **scrollable horizontal layout** for quick navigation.
+
+* **Forecast Cards**: Each card displays **Time, Temperature, Weather Condition, Icon, and Wind Speed**.
+
+* **Visual Indicators**:  
+  * Weather **icons** for quick condition recognition.  
+  * **Dynamic temperature colors** based on heat intensity.
+
+* **Responsive Design**:  
+  * **Mobile**: Compact cards with swipe scrolling.  
+  * **Tablet/Desktop**: Slightly larger cards with better spacing and **scroll buttons**.
+
+* **Interactive Controls**:  
+  * **View Hourly Forecast** button to open the section.  
+  * **Close button** to hide the forecast panel.
+
+
+### **5. Error Handling & Validation**
 
 * **Custom Notifications**: Replaces standard JavaScript `alert()` with polished, UI-friendly message boxes for API errors or empty queries.  
 * **Extreme Weather Alerts**: Built-in logic to trigger custom alerts when temperatures exceed **40°C**.  
@@ -139,6 +164,10 @@ This project demonstrates:
 * Users can search weather details for any city.
 ![City Search](screenshots/ss12.png)
 
+
+### **Temperature Alert and Alert Message**
+* Users will be notified if temperature goes above 40 C.
+![Temperature Alert](screenshots/ss3.png)
 
 ### Five-Day Weather Forecast
 
