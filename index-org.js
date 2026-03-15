@@ -86,7 +86,6 @@ if (!recent_search_list) {
 // showMessageBox();
 
 function getCityWeather() {
-
   // Get the city input element
   const input = document.getElementById("input_city_name");
 
@@ -99,14 +98,12 @@ function getCityWeather() {
   // Regex pattern allowing only letters, spaces and hyphen
   const cityRegex = /^[a-zA-Z\s-]+$/;
 
-
   // Validation 1: Check if input field is empty
   if (city_name === "") {
     showMessageBox("error", "Please enter a city name");
     input.focus();
     return;
   }
-
 
   // Validation 2: Prevent very short city names
   // Avoid invalid inputs like "a", "x"
@@ -116,7 +113,6 @@ function getCityWeather() {
     return;
   }
 
-
   // Validation 3: Ensure city name contains only letters and spaces
   // Blocks numbers and special characters like 123, @, #
   if (!cityRegex.test(city_name)) {
@@ -125,7 +121,6 @@ function getCityWeather() {
     return;
   }
 
-
   // Validation 4: Remove multiple spaces between words
   // Example: "New     York" → "New York"
   city_name = city_name.replace(/\s+/g, " ");
@@ -133,9 +128,8 @@ function getCityWeather() {
   document.getElementById("search_by_city").disabled = true;
   document.getElementById("search_by_city").textContent = "Loading...";
   setTimeout(() => {
-      document.getElementById("search_by_city").disabled = false;
-    }, 1000 * 5);
-
+    document.getElementById("search_by_city").disabled = false;
+  }, 1000 * 5);
 
   // If all validations pass, call the weather APIs
   getCityWeatherApi(city_name);
@@ -144,7 +138,6 @@ function getCityWeather() {
 
 async function getCityWeatherApi(city) {
   try {
-
     // Construct API URL with city name and API key
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=95c3cff85637b75da8b956e35d554997&units=metric`;
 
@@ -154,30 +147,34 @@ async function getCityWeatherApi(city) {
     // Convert API response into JSON format
     const data = await response.json();
 
-
     // Validation 1: Check if city is invalid
     // OpenWeather API returns cod = "404" when city is not found
     if (data.cod === "404") {
       document.getElementById("search_by_city").innerHTML =
-      `<i class="fa-solid fa-arrow-right"></i> Search`;
+        `<i class="fa-solid fa-arrow-right"></i> Search`;
       // Show message using custom message box
       showMessageBox("error", "City not found. Please enter a valid city.");
+      const input = document.getElementById("input_city_name");
+      input.focus();
 
       // Stop further execution
       return;
     }
 
-
     // Validation 2: Check if API response contains valid weather data
     if (!data || !data.main) {
-document.getElementById("search_by_city").innerHTML =
-      `<i class="fa-solid fa-arrow-right"></i> Search`;
+      document.getElementById("search_by_city").innerHTML =
+        `<i class="fa-solid fa-arrow-right"></i> Search`;
       // If data is missing required fields, show error message
-      showMessageBox("error", "Unable to fetch weather data. Please try again.");
+      showMessageBox(
+        "error",
+        "Unable to fetch weather data. Please try again.",
+      );
+      const input = document.getElementById("input_city_name");
+      input.focus();
 
       return;
     }
-
 
     // If valid city and data received successfully
     console.log("city weather", data);
@@ -185,7 +182,8 @@ document.getElementById("search_by_city").innerHTML =
     // Store weather data globally
     weather = data;
 
-    
+    // Enable this line to check temperature effect if natural temperature is not above 40 C
+    // weather.main.temp = 41.2
 
     const input = document.getElementById("input_city_name");
 
@@ -197,14 +195,14 @@ document.getElementById("search_by_city").innerHTML =
 
     // Update weather UI panel with received data
     setWeatherInfoToPanel(weather);
-
   } catch (err) {
-
     // Validation 3: Handle network errors (no internet, API failure)
     console.log(err);
 
-    showMessageBox("alert", "Network error. Please check your internet connection.");
-
+    showMessageBox(
+      "alert",
+      "Network error. Please check your internet connection.",
+    );
   }
 }
 
@@ -216,7 +214,10 @@ function getCurrentLocation() {
       getWeatherDataFromCoords(lat, lon);
     },
     (err) => {
-      showMessageBox('error',`${err.message}. Please check your location permission.`)
+      showMessageBox(
+        "error",
+        `${err.message}. Please check your location permission.`,
+      );
       // console.log("error", err.message);
     },
   );
@@ -251,6 +252,8 @@ async function get5Dayforcast(city = "Indore") {
         //console.log("5day data" , data.list); // contains 40 records
         data_list = data.list;
         extractFiveDayForecast(data_list);
+
+        renderHourlyForecast(data_list);
       });
   } catch (err) {
     console.log(err);
@@ -262,11 +265,12 @@ async function get5Dayforcast(city = "Indore") {
 function setWeatherInfoToPanel(weather) {
   if (!weather) return;
 
+  
+
   const weatherIcon = getWeatherIcon(weather.weather[0].main);
   const tempColor = getTempColor(weather.main.temp);
 
-  document.getElementById("temt-space").innerHTML = 
-  `
+  document.getElementById("temt-space").innerHTML = `
   <span id="info_weather_temp" class="temp_value ${tempColor}"
                   >Loading...</span
                 >
@@ -277,10 +281,8 @@ function setWeatherInfoToPanel(weather) {
     `<i class="fa-solid ${weatherIcon} text-4xl"></i>`;
 
   // city name
-  document.getElementById("info_city_name").innerHTML =  `${weather.name}
-                <span id="alert_sign"></span>`
-
-
+  document.getElementById("info_city_name").innerHTML = `${weather.name}
+                <span id="alert_sign"></span>`;
 
   // weather type with icon
   document.getElementById("info_weather_category").innerHTML =
@@ -310,14 +312,12 @@ function setWeatherInfoToPanel(weather) {
   document.getElementById("info_max_temp").innerHTML =
     `<i class="fa-solid fa-temperature-arrow-up text-red-200"></i> ${weather.main.temp_max}`;
 
-
-  if( weather.main.temp  >= 40){
-  // if(true){
-    document.getElementById('alert_sign').innerHTML = `<i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 alert-animate"></i>`
-    showMessageBox("alert","Temperature High Alert")
+  if (weather.main.temp >= 40) {
+    // if(true){
+    document.getElementById("alert_sign").innerHTML =
+      `<i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 alert-animate"></i>`;
+    showMessageBox("alert", "Temperature High Alert");
   }
-
-
 }
 
 // ----------------- X ----------------------- X ----------------------------
@@ -559,6 +559,95 @@ function getForecastBackground(weather) {
 
 // ----------------------- X ------------------ X ---------------------
 
+// ------------------- HOURLY FORECAST DETAILS -------------------------
+
+const hourlySection = document.getElementById("hourly_section");
+const hourlyContainer = document.getElementById("hourly_container");
+
+// learnt a new way to use onclick event directly
+// Adding Event to view and close hourly section
+
+document.getElementById("btn_hourly").onclick = () => {
+  hourlySection.classList.remove("hidden");
+};
+
+document.getElementById("close_hourly").onclick = () => {
+  hourlySection.classList.add("hidden");
+};
+
+function renderHourlyForecast(forecastList) {
+  hourlyContainer.innerHTML = "";
+
+  // taking first 12 part of the day.
+  forecastList.slice(0, 12).forEach((item) => {
+    // manipulating the date object as per requirement
+    const time = new Date(item.dt * 1000).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    // taking out important information
+    const temp = Math.round(item.main.temp);
+    const weatherType = item.weather[0].main;
+    const wind = item.wind.speed;
+
+    // get appropiate weather icon and temperature color
+    const iconClass = getWeatherIcon(weatherType);
+    const tempColor = getTempColor(temp);
+
+    //creating new element
+    const card = document.createElement("div");
+
+    // designing a complete card
+    card.className = `
+            flex flex-col items-center justify-center
+            bg-white/10 backdrop-blur-md rounded-xl
+            text-white shadow-md
+
+            min-w-[80px] 
+            sm:min-w-[110px] 
+            lg:min-w-[140px]
+
+            p-2 sm:p-3 lg:p-4
+            `;
+
+    card.innerHTML = `
+      <p class="text-xs sm:text-sm opacity-80">${time}</p>
+
+      <i class="fa-solid ${iconClass} text-lg sm:text-xl md:text-2xl my-1"></i>
+
+      <p class="text-xs sm:text-sm">${weatherType}</p>
+
+      <p class="text-sm sm:text-base font-semibold ${tempColor}">
+        ${temp}°
+      </p>
+
+      <p class="text-[10px] sm:text-xs opacity-70">
+        ${wind}
+      </p>
+    `;
+
+    hourlyContainer.appendChild(card);
+  });
+}
+
+const scrollContainer = document.getElementById("hourly_container");
+
+document.getElementById("scroll_left").onclick = () => {
+  // scroll 
+  scrollContainer.scrollBy({  
+    left: -300,
+    behavior: "smooth"
+  });
+};
+
+document.getElementById("scroll_right").onclick = () => {
+  scrollContainer.scrollBy({
+    left: 300,
+    behavior: "smooth"
+  });
+};
+
 // ------------------- FORECAST SECTION FUNCTIONS ----------------------
 
 // extracting 5 day forecast from 40 records
@@ -653,7 +742,7 @@ function renderSkeletonForecast() {
 
   container.innerHTML = "";
 
-  for(let i = 0 ; i < 5 ; i++){
+  for (let i = 0; i < 5; i++) {
     // const weatherIcon = getWeatherIcon(day.weather);
     // const tempColor = getTempColor(day.temp);
 
