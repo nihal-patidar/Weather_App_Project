@@ -95,6 +95,29 @@ A sophisticated, responsive weather application developed to meet the comprehens
 
 * **Error Feedback** - Shows a clear error message if weather data cannot be fetched.
 
+
+## **Overall Layout Structure**
+Page Layout
+
+        Weather Dashboard
+        │
+        ├── Header
+        │
+        ├── Search Section
+        │
+        ├── Alert Notification
+        │
+        ├── Weather Filters
+        │
+        ├── Current Weather Section
+        │    ├── Weather Summary
+        │    └── Weather Metrics
+        │
+        ├── Hourly Forecast Toggle
+        │
+        ├── Hourly Forecast Section
+        │
+        └── Five Day Forecast Section
 ---
 
 ## 🛠️ Tech Stack
@@ -126,6 +149,12 @@ A sophisticated, responsive weather application developed to meet the comprehens
 
     ```
     cd Weather_App_Project
+
+3. **Open in browser**
+
+    * Double on index.html which will open html file in browser.
+
+
 
 
 

@@ -16,7 +16,6 @@
 
 // addFocusAndBlurEvent() : Changes the outline of City Search Input box on focus
 
-//
 
 // ----------------------- VARIABLE DECLARATION ----------------------------
 
@@ -857,6 +856,8 @@ function render5RecentSearches() {
 
   box.innerHTML = ""; // clearing previous list ;
 
+  if( !recent_search_list ) return ;
+  
   if (recent_search_list.length === 0) {
     // avoid empty list display
     //
