@@ -839,12 +839,12 @@ function showMessageBox(type, message) {
   }, 4000);
 }
 
-document.getElementById('btn_tomorrow').onclick = ()=>{
+document.getElementById('btn_tomorrow').addEventListener('click', ()=>{
   showMessageBox("alert", "This functionality will be available soon");
   setTimeout(() => {
     document.getElementById('btn_today').click();
   }, 2000);
-}
+})
 
 // function to close message box
 function closeMessageBox() {

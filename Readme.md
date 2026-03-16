@@ -4,9 +4,24 @@ A sophisticated, responsive weather application developed to meet the comprehens
 
 ## **Live Demo**
 
-* **Deployed Application**: [View Live Weather App](YOUR_DEPLOYED_LINK)
+* **Deployed Application**: [View Live Weather App](https://sunshine-by-nihal.netlify.app/)
+
+    OR  
+
+    Open the link in browser
+
+    ```bash
+    https://sunshine-by-nihal.netlify.app/
 
 * **GitHub Repository**: [View Source Code](https://github.com/nihal-patidar/Weather_App_Project.git)
+
+    OR  
+
+    Open the link in browser
+
+    ```bash
+    https://github.com/nihal-patidar/Weather_App_Project.git
+
 
 ## 🚀 Key Features
 
