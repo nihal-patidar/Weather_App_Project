@@ -839,6 +839,13 @@ function showMessageBox(type, message) {
   }, 4000);
 }
 
+document.getElementById('btn_tomorrow').onclick = ()=>{
+  showMessageBox("alert", "This functionality will be available soon");
+  setTimeout(() => {
+    document.getElementById('btn_today').click();
+  }, 2000);
+}
+
 // function to close message box
 function closeMessageBox() {
   document.getElementById("message_box").classList.add("hidden");
@@ -856,8 +863,14 @@ function render5RecentSearches() {
 
   box.innerHTML = ""; // clearing previous list ;
 
-  if( !recent_search_list ) return ;
-  
+  // if( !recent_search_list ) return ;
+  if (!recent_search_list) {
+    // avoid empty list display
+    //
+    box.classList.add("hidden");
+    return;
+  }
+
   if (recent_search_list.length === 0) {
     // avoid empty list display
     //
