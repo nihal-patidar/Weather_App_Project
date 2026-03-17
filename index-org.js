@@ -909,14 +909,14 @@ function render5RecentSearches() {
       "flex justify-between items-center px-3 py-1 border-b border-gray-200 hover:bg-blue-300 hover:text-gray-800 transition-colors duration-200 cursor-pointer";
 
     // clicking on row should select that city
-    row.onclick = () => selectRecent(item);
+    // row.onclick = () => selectRecent(item);
 
     row.innerHTML = `
-  <span>${item}</span>
+  <button onclick="selectRecent('${item}')" class="max-w-fit capitalize">${item}</button>
 
   <!-- remove button -->
   <button 
-    class="text-gray-400 hover:text-red-500 transition-colors"
+    class="text-gray-400 hover:text-red-500 transition-colors py-1 px-2"
     onclick="removeRecent(${index})"
   >
     x
