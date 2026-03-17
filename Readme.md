@@ -195,40 +195,41 @@ This project demonstrates:
 ### **Home Screen (Current Location Weather)**
 
 * Displays the current weather of the user's detected location.
-![Home Screen](screenshots/ss5.png)
+![Home Screen](screenshots/ssn0.png)
 
 
 ### **Skeleton Loading UI**
 * Displays the loading skeleton until data loaded.
-![Skeleton Loader](screenshots/ss2.png)
+![Skeleton Loader](screenshots/ssn1.png)
 
 
 ### **City Weather Search**
 
 * Users can search weather details for any city.
-![City Search](screenshots/ss12.png)
+![City Search](screenshots/ssn11.png)
 
 
 ### **Temperature Alert and Alert Message**
 * Users will be notified if temperature goes above 40 C.
-![Temperature Alert](screenshots/ss3.png)
+![Temperature Alert](screenshots/ssn2.png)
 
-### Five-Day Weather Forecast
+### Hourly and Five-Day Weather Forecast
 
 * Displays weather forecast including temperature, humidity and wind speed.
 
-![5 Day Forecasts](screenshots/ss1.png)
+![5 Day Forecasts](screenshots/ssn7.png)
 
 
 ### Tablet View (Medium Screen)
 
 * Demonstrates the responsive layout of the dashboard on medium-sized screens such as tablets and small laptop
 
-![Medium Screens](screenshots/ss8.png);
+![Medium Screens](screenshots/ssn9.png);
 
 
 ### Mobile View (iPhone SE)
 
 * Illustrates the responsive design of the application on small mobile devices ensuring usability and readability.
 
-![Mobile Sizes](screenshots/ss10.png);
+![Mobile Sizes](screenshots/ssn4.png)
+![Mobile Sizes](screenshots/ssn3.png)

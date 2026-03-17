@@ -176,7 +176,7 @@ async function getCityWeatherApi(city) {
     }
 
     // If valid city and data received successfully
-    console.log("city weather", data);
+    // console.log("city weather", data);
 
     // Store weather data globally
     weather = data;
@@ -231,7 +231,7 @@ function getWeatherDataFromCoords(lat, long) {
   fetch(url).then(async (response) => {
     const data = await response.json();
     if (data) {
-      console.log("weather 3", data);
+      // console.log("weather 3", data);
       weather = data;
       document.getElementById("curr_loc_btn").innerHTML =
         `<i class="fa-solid fa-location-crosshairs"></i> Current Location`;
@@ -321,7 +321,7 @@ document.getElementById("info_sunset").innerHTML = convertToIST(weather.sys.suns
   if (weather.main.temp >= 40) {
     // if(true){
     document.getElementById("alert_sign").innerHTML =
-      `<i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 alert-animate"></i>`;
+      `<i class="fa-solid fa-triangle-exclamation text-3xl sm:text-4xl text-red-400 drop-shadow-[0_0_10px_rgba(255,80,80,0.6)] animate-pulse"></i>`;
     showMessageBox("alert", "Temperature High Alert");
   }
 }
@@ -555,7 +555,7 @@ function getTempColor(temp) {
   if (temp <= 30) return "text-yellow-400";
   if (temp <= 40) return "text-orange-400";
 
-  return "text-red-500";
+  return "text-red-400 font-semibold drop-shadow-[0_4px_12px_rgba(255,60,60,0.8)]";
 }
 
 function getForecastBackground(weather) {
@@ -959,6 +959,8 @@ function selectRecent(value) {
   const input = document.getElementById("input_city_name");
 
   input.value = value;
+
+  getCityWeather();
 }
 
 function removeRecent(index) {
