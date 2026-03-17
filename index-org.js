@@ -185,8 +185,11 @@ async function getCityWeatherApi(city) {
     // weather.main.temp = 41.2
 
     const input = document.getElementById("input_city_name");
+    
 
     addRecent(input.value);
+
+    input.value = ""
 
     // Reset search button text
     document.getElementById("search_by_city").innerHTML =
