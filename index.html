@@ -31,10 +31,24 @@
         <!-- Header and Search Functionality -->
         <header>
         <h1
-          class="text-2xl font-bold italic text-orange-400 text-center p-4 mb-6"
-        >
-          <strong class="border-b-4 border-orange-400">Sunshine</strong>
-        </h1>
+  class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center p-4 mb-6 tracking-wide"
+>
+  <span
+    class="
+      bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400
+      bg-clip-text text-transparent
+
+      drop-shadow-[0_4px_20px_rgba(255,180,0,0.35)]
+
+      relative
+      after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[3px]
+      after:bg-gradient-to-r after:from-yellow-300 after:to-orange-400
+      after:rounded-full
+    "
+  >
+    Sunshine
+  </span>
+</h1>
 
         <div class="flex flex-col gap-4">
           <!-- Search Area Header-->
@@ -120,165 +134,148 @@
             >
               <!-- First Item Show City Name , Weather Category like ( Rain, clear , snow ) and Temperature in celsius-->
               <div
-                class="bg-gradient-to-br from-sky-500 to-blue-700 col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80 shadow-md"
-              >
-                <!-- <h2
-                class="text-2xl font-bold capitalize text-white"
-                id="info_city_name"
-              >
-                --
-              </h2> -->
-                <div class="flex justify-between items-center">
-                  <h2 id="info_city_name" class="text-3xl font-bold text-white">
-                    <span class="skeleton h-7 w-40 rounded block"></span>
-                  </h2>
-                  <span
-                    id="today_info_date"
-                    class="text-white/80 text-sm"
-                  ></span>
-                </div>
+  class="
+    col-span-2 row-span-2 rounded-md flex flex-col p-5 gap-4 h-80
 
-                <!-- weather icon container -->
-                <div
-                  class="w-16 h-16 rounded-2xl flex justify-center items-center bg-white/30 backdrop-blur-sm"
-                  id="day_category"
-                >
-                  <i class="fa-solid fa-sun text-amber-200 text-4xl"></i>
-                </div>
+    bg-gradient-to-br from-emerald-400/30 via-teal-300/20 to-cyan-300/20
+    backdrop-blur-xl border border-white/30
 
-                <h3
-                  class="text-xl font-semibold capitalize text-white flex items-center gap-2"
-                  id="info_weather_category"
-                >
-                  <span class="skeleton h-7 w-40 rounded block"></span>
-                </h3>
+    shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+    hover:shadow-[0_15px_50px_rgba(0,0,0,0.45)]
 
-                <h1
-                  class="text-4xl font-bold capitalize flex items-center gap-2"
-                  id="temt-space"
-                >
-                  <span id="info_weather_temp" class="temp_value text-white"
-                    ><span class="skeleton h-7 w-40 rounded block"></span
-                  ></span>
-                  <span class="temp_unit text-white">°C</span>
-                </h1>
-              </div>
+    transition-all duration-300 hover:-translate-y-1
+  "
+>
+  <div class="flex justify-between items-center">
+    <h2 id="info_city_name" class="text-3xl font-bold text-white drop-shadow-sm">
+      <span class="skeleton h-7 w-40 rounded block"></span>
+    </h2>
+    <span id="today_info_date" class="text-white/80 text-sm"></span>
+  </div>
+
+  <!-- weather icon container -->
+  <div
+    class="w-16 h-16 rounded-2xl flex justify-center items-center 
+    bg-white/25 backdrop-blur-md border border-white/20 shadow-inner"
+    id="day_category"
+  >
+    <i class="fa-solid fa-sun text-amber-200 text-4xl drop-shadow-sm"></i>
+  </div>
+
+  <h3
+    class="text-xl font-semibold capitalize text-white drop-shadow-sm flex items-center gap-2"
+    id="info_weather_category"
+  >
+    <span class="skeleton h-7 w-40 rounded block"></span>
+  </h3>
+
+  <h1
+    class="text-4xl font-bold capitalize flex items-center gap-2"
+    id="temt-space"
+  >
+    <span id="info_weather_temp" class="temp_value text-white drop-shadow-sm">
+      <span class="skeleton h-7 w-40 rounded block"></span>
+    </span>
+    <span class="temp_unit text-white/80">°C</span>
+  </h1>
+</div>
 
               <!-- Second Item Show Details about Wind like (Speed , Direction) -->
               <!-- Grid Item for Weather Data For Wind -->
               <!-- Grid Item for Weather Data For Wind -->
-              <div
-                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-              >
-                <!-- heading section for wind -->
-                <h2
-                  class="flex items-center justify-between text-lg font-semibold text-white"
-                >
-                  <span>Wind Speed</span>
-                  <!-- wind icon -->
-                  <i class="fa-solid fa-wind text-cyan-200"></i>
-                </h2>
+<!-- Wind -->
+<div class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+  
+  <h2 class="flex items-center justify-between text-sm sm:text-base md:text-lg font-semibold text-white drop-shadow-sm">
+    <span>Wind Speed</span>
+    <i class="fa-solid fa-wind text-cyan-200"></i>
+  </h2>
 
-                <!-- wind data -->
-                <div
-                  class="flex flex-col gap-2 text-sm md:text-xl text-gray-100"
-                >
-                  <h2>
-                    <span id="info_wind_speed" class="font-medium"
-                      ><span class="skeleton h-7 w-40 rounded block"></span
-                    ></span>
-                    <span class="opacity-80 text-sm"> m/s</span>
-                  </h2>
-                </div>
-              </div>
+  <div class="flex flex-col gap-2 text-base sm:text-lg md:text-xl text-white">
+    <h2>
+      <span id="info_wind_speed" class="font-medium">
+        <span class="skeleton h-7 w-40 rounded block"></span>
+      </span>
+      <span class="text-white/80 text-sm"> m/s</span>
+    </h2>
+  </div>
+</div>
 
-              <!-- Grid Item for Weather Data For Humidity -->
-              <div
-                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-              >
-                <!-- heading -->
-                <h2
-                  class="flex items-center justify-between text-lg font-semibold text-white"
-                >
-                  <span>Humidity</span>
-                  <!-- humidity icon -->
-                  <i class="fa-solid fa-droplet text-blue-300"></i>
-                </h2>
+<!-- Humidity -->
+<div class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+  
+  <h2 class="flex items-center justify-between text-sm sm:text-base md:text-lg font-semibold text-white drop-shadow-sm">
+    <span>Humidity</span>
+    <i class="fa-solid fa-droplet text-blue-300"></i>
+  </h2>
 
-                <!-- humidity value -->
-                <div class="text-sm md:text-xl text-gray-100">
-                  <h2>
-                    <span id="info_humidity_value" class="font-medium"
-                      ><span class="skeleton h-7 w-40 rounded block"></span
-                    ></span>
-                    <span class="opacity-80">%</span>
-                  </h2>
-                </div>
-              </div>
+  <div class="text-base sm:text-lg md:text-xl text-white">
+    <h2>
+      <span id="info_humidity_value" class="font-medium">
+        <span class="skeleton h-7 w-40 rounded block"></span>
+      </span>
+      <span class="text-white/80">%</span>
+    </h2>
+  </div>
+</div>
 
-              <!-- Grid Item for Weather Data For Pressure -->
-              <div
-                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-              >
-                <!-- heading -->
-                <h2
-                  class="flex items-center justify-between text-lg font-semibold text-white"
-                >
-                  <span>Pressure</span>
-                  <!-- pressure icon -->
-                  <i class="fa-solid fa-gauge text-purple-300"></i>
-                </h2>
+<!-- Pressure -->
+<div class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+  
+  <h2 class="flex items-center justify-between text-sm sm:text-base md:text-lg font-semibold text-white drop-shadow-sm">
+    <span>Pressure</span>
+    <i class="fa-solid fa-gauge text-purple-300"></i>
+  </h2>
 
-                <!-- pressure value -->
-                <div class="text-sm text-gray-100">
-                  <h2>
-                    <span
-                      id="info_pressure_value"
-                      class="font-medium md:text-xl"
-                      ><span class="skeleton h-7 w-40 rounded block"></span
-                    ></span>
-                    <span class="opacity-80">hPa</span>
-                  </h2>
-                </div>
-              </div>
+  <div class="text-base sm:text-lg md:text-xl text-white">
+    <h2>
+      <span id="info_pressure_value" class="font-medium">
+        <span class="skeleton h-7 w-40 rounded block"></span>
+      </span>
+      <span class="text-white/80"> hPa</span>
+    </h2>
+  </div>
+</div>
 
-              <!-- Grid Item for Weather Data For Temperature -->
-              <div
-                class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-              >
-                <!-- heading -->
-                <h2
-                  class="flex items-center justify-between text-lg font-semibold text-white"
-                >
-                  <span>Temperature</span>
-                  <!-- temperature icon -->
-                  <i class="fa-solid fa-temperature-half text-orange-300"></i>
-                </h2>
+<!-- Sunrise / Sunset -->
+<!-- Sun Rise / Set -->
+<div class="col-span-1 info-grid-item rounded-lg flex flex-col p-5 gap-4 backdrop-blur-md shadow-md border border-white/20 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+  
+  <!-- heading -->
+  <h2 class="flex items-center justify-between text-sm sm:text-base md:text-lg font-semibold text-white drop-shadow-sm">
+    <span>Sun Rise / Set</span>
+    <i class="fa-solid fa-sun text-yellow-300 drop-shadow-sm"></i>
+  </h2>
 
-                <!-- temperature values -->
-                <div
-                  class="flex flex-col gap-2 text-sm md:text-xl text-gray-100"
-                >
-                  <!-- min temperature -->
-                  <h2>
-                    <span class="opacity-80">Min :</span>
-                    <span id="info_min_temp" class="font-medium temp_value"
-                      ><span class="skeleton h-7 w-16 rounded inline-block"></span
-                    ></span>
-                    <span class="temp_unit">°C</span>
-                  </h2>
+  <!-- values -->
+  <div class="flex flex-col gap-2 text-base sm:text-lg md:text-xl text-white">
+    
+    <!-- Sunrise -->
+    <h2 class="flex items-center justify-between">
+      <span class="flex items-center gap-2 text-white/80">
+        <i class="fa-solid fa-sunrise text-yellow-300 drop-shadow-sm"></i>
+        Rise :
+      </span>
 
-                  <!-- max temperature -->
-                  <h2>
-                    <span class="opacity-80">Max :</span>
-                    <!-- removed extra space in id -->
-                    <span id="info_max_temp" class="font-medium temp_value"
-                      ><span class="skeleton h-7 w-16 rounded inline-block"></span
-                    ></span>
-                    <span class="temp_unit">°C</span>
-                  </h2>
-                </div>
-              </div>
+      <span id="info_sunrise" class="font-medium">
+        <span class="skeleton h-7 w-16 rounded inline-block"></span>
+      </span>
+    </h2>
+
+    <!-- Sunset -->
+    <h2 class="flex items-center justify-between">
+      <span class="flex items-center gap-2 text-white/80">
+        <i class="fa-solid fa-sunset text-orange-300 drop-shadow-sm"></i>
+        Set :
+      </span>
+
+      <span id="info_sunset" class="font-medium">
+        <span class="skeleton h-7 w-16 rounded inline-block"></span>
+      </span>
+    </h2>
+
+  </div>
+</div>
             </div>
           </div>
         </section>
@@ -287,23 +284,42 @@
         <!-- View Hourly Forecast Button -->
 <div class="text-center mt-6">
   <button
-    id="btn_hourly"
-    class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-  >
-    View Hourly Forecast
-  </button>
+  id="btn_hourly"
+  class="
+    text-white font-semibold 
+    text-xs sm:text-sm md:text-base
+
+    px-4 sm:px-5 py-2 sm:py-2.5
+
+    bg-white/10 backdrop-blur-lg 
+    border border-white/20 
+    rounded-full
+
+    shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+
+    transition-all duration-300 ease-out
+
+    hover:bg-white/20 
+    hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] 
+    hover:-translate-y-0.5
+
+    active:scale-95
+  "
+>
+  View Hourly Forecast
+</button>
 </div>
 
 <!-- Hourly Forecast Section -->
 <section
   id="hourly_section"
-  class="hidden bg-gradient-to-br from-sky-500 to-blue-700 mt-6 bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-lg mx-4"
+  class="hidden mt-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-[0_8px_32px_rgba(0,0,0,0.35)] mx-4"
 >
   <!-- Header -->
   <div class="flex justify-between items-center mb-3">
-    <h2 class="text-lg sm:text-xl font-semibold text-white">
-      3 Hour Forecast
-    </h2>
+    <h2 class="text-sm sm:text-base md:text-lg font-semibold text-white drop-shadow-sm">
+  3 Hour Forecast
+</h2>
 
     <button
       id="close_hourly"
@@ -402,51 +418,59 @@
       </button>
     </div>
 
-    <footer class="mt-10 text-gray italic rounded-t-2xl shadow-lg">
-      <div
-        class="max-w-6xl mx-auto px-6 py-8 flex flex-col text-center justify-between items-center gap-6"
-      >
-        <!-- App Info -->
-        <div class="text-center">
-          <h2 class="text-xl font-bold tracking-wide">
-            <strong class="border-b-2 border-orange-400">Sunshine</strong>
-          </h2>
-          <p class="text-gray-600 text-sm mt-1">
-            Real-time weather updates and 5-day forecasts.
-          </p>
-        </div>
+    <footer class="mt-10 rounded-t-2xl bg-white/10 backdrop-blur-xl border-t border-white/20 shadow-[0_-8px_32px_rgba(0,0,0,0.3)]">
 
-        <!-- Links -->
-        <div class="flex items-center gap-6 text-sm text-gray-600 italic">
-          <a href="#" class="hover:text-black transition">Home</a>
-          <a href="#hourly_section" class="hover:text-black transition">Hourly Forecast</a>
-          <a href="#weather_section" class="hover:text-black transition">Forecast</a>
-          <a href="#forecast_section" class="hover:text-black transition">About</a>
-        </div>
+  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col text-center justify-between items-center gap-6">
+    
+    <!-- App Info -->
+    <div class="text-center">
+      <h2 class="text-xl sm:text-2xl font-bold tracking-wide">
+        <span class="bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400 bg-clip-text text-transparent drop-shadow-sm">
+          Sunshine
+        </span>
+      </h2>
+      <p class="text-white/70 text-sm mt-1">
+        Real-time weather updates and 5-day forecasts.
+      </p>
+    </div>
 
-        <!-- Social / Credits -->
-        <div class="flex items-center gap-4 text-xl">
-          <a href="#" class="hover:scale-110 transition">
-            <i class="fa-brands fa-github"></i>
-          </a>
+    <!-- Links -->
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-white/70 italic">
+      <a href="#" class="hover:text-white transition duration-200">Home</a>
+      <a href="#hourly_section" class="hover:text-white transition duration-200">Hourly Forecast</a>
+      <a href="#weather_section" class="hover:text-white transition duration-200">Forecast</a>
+      <a href="#forecast_section" class="hover:text-white transition duration-200">About</a>
+    </div>
 
-          <a href="#" class="hover:scale-110 transition">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
+    <!-- Social / Credits -->
+    <div class="flex items-center gap-5 text-xl text-white/80">
+      <a href="https://github.com/nihal-patidar/Weather_App_Project.git"
+         class="hover:scale-110 hover:text-white transition duration-200">
+        <i class="fa-brands fa-github"></i>
+      </a>
 
-          <a href="#" class="hover:scale-110 transition">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
-        </div>
-      </div>
+      <a href="https://www.linkedin.com/in/nihal-patidar/"
+         class="hover:scale-110 hover:text-white transition duration-200">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
 
-      <!-- Bottom Line -->
-      <div
-        class="border-t border-white/20 text-center py-3 text-sm text-gray-600"
-      >
-        © 2026 <strong class="border-b-2 border-orange-400">Sunshine</strong> · Built with HTML, Tailwind & JavaScript
-      </div>
-    </footer>
+      <a href="mailto:nihal.work.dev@gmail.com"
+         class="hover:scale-110 hover:text-white transition duration-200">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom Line -->
+  <div class="border-t border-white/20 text-center py-3 text-xs sm:text-sm text-white/60">
+    © 2026 
+    <span class="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
+      Sunshine
+    </span>
+    · Built with HTML, Tailwind & JavaScript
+  </div>
+
+</footer>
 
     <!-- <script src="getApiData.js"></script> -->
     <!-- <script src="searchBar.js"></script> -->
