@@ -304,12 +304,16 @@ function setWeatherInfoToPanel(weather) {
     `<i class="fa-solid fa-gauge text-purple-200"></i> ${weather.main.pressure}`;
 
   // min temperature
-  document.getElementById("info_min_temp").innerHTML =
-    `<i class="fa-solid fa-temperature-arrow-down text-blue-200"></i> ${weather.main.temp_min}`;
+  // document.getElementById("info_min_temp").innerHTML =
+  //   `<i class="fa-solid fa-temperature-arrow-down text-blue-200"></i> ${weather.main.temp_min}`;
 
-  // max temperature
-  document.getElementById("info_max_temp").innerHTML =
-    `<i class="fa-solid fa-temperature-arrow-up text-red-200"></i> ${weather.main.temp_max}`;
+  // // max temperature
+  // document.getElementById("info_max_temp").innerHTML =
+  //   `<i class="fa-solid fa-temperature-arrow-up text-red-200"></i> ${weather.main.temp_max}`;
+
+  document.getElementById("info_sunrise").innerHTML = convertToIST(weather.sys.sunrise);
+
+document.getElementById("info_sunset").innerHTML = convertToIST(weather.sys.sunset);
 
   if (weather.main.temp >= 40) {
     // if(true){
@@ -317,6 +321,17 @@ function setWeatherInfoToPanel(weather) {
       `<i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 alert-animate"></i>`;
     showMessageBox("alert", "Temperature High Alert");
   }
+}
+
+function convertToIST(unixTime) {
+  const date = new Date(unixTime * 1000); // convert to ms
+
+  return date.toLocaleTimeString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 }
 
 // ----------------- X ----------------------- X ----------------------------
@@ -598,33 +613,37 @@ function renderHourlyForecast(forecastList) {
     const card = document.createElement("div");
 
     // designing a complete card
-    card.className = `
-            flex flex-col items-center justify-center
-            bg-white/10 backdrop-blur-md rounded-xl
-            text-white shadow-md
+card.className = `
+  flex flex-col items-center justify-center
+  bg-white/10 backdrop-blur-xl border border-white/20
+  rounded-xl text-white
 
-            min-w-[80px] 
-            sm:min-w-[110px] 
-            lg:min-w-[140px]
+  shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+  hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)]
+  transition-all duration-300 hover:-translate-y-1
 
-            p-2 sm:p-3 lg:p-4
-            `;
+  min-w-[80px] 
+  sm:min-w-[110px] 
+  lg:min-w-[140px]
 
-    card.innerHTML = `
-      <p class="text-xs sm:text-sm opacity-80">${time}</p>
+  p-2 sm:p-3 lg:p-4
+`;
 
-      <i class="fa-solid ${iconClass} text-lg sm:text-xl md:text-2xl my-1"></i>
+card.innerHTML = `
+  <p class="text-[10px] sm:text-xs text-white/70">${time}</p>
 
-      <p class="text-xs sm:text-sm">${weatherType}</p>
+  <i class="fa-solid ${iconClass} text-lg sm:text-xl md:text-2xl my-1 drop-shadow-sm"></i>
 
-      <p class="text-sm sm:text-base font-semibold ${tempColor}">
-        ${temp}°
-      </p>
+  <p class="text-[10px] sm:text-xs text-white/80">${weatherType}</p>
 
-      <p class="text-[10px] sm:text-xs opacity-70">
-        ${wind}
-      </p>
-    `;
+  <p class="text-sm sm:text-base font-semibold ${tempColor}">
+    ${temp}°
+  </p>
+
+  <p class="text-[10px] sm:text-xs text-white/60">
+    ${wind}
+  </p>
+`;
 
     hourlyContainer.appendChild(card);
   });
@@ -675,7 +694,6 @@ function extractFiveDayForecast(list) {
 
 function renderForecast(data) {
   const container = document.getElementById("forecast_container");
-
   container.innerHTML = "";
 
   data.forEach((day) => {
@@ -684,114 +702,114 @@ function renderForecast(data) {
 
     const card = document.createElement("div");
 
-    const weatherBg = getForecastBackground(day.weather);
-
     card.className = `
       relative overflow-hidden
-      rounded-xl p-5 min-h-[170px]
+      rounded-2xl p-5 min-h-[170px]
+
       flex flex-col gap-4
-      ${weatherBg}
-      text-white shadow-lg
+
+      bg-gradient-to-br from-emerald-400/20 via-teal-300/10 to-cyan-300/10
+      backdrop-blur-xl border border-white/20
+
+      text-white
+
+      shadow-[0_8px_32px_rgba(0,0,0,0.3)]
+      hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]
       transition-all duration-300
-      hover:scale-105 hover:shadow-2xl
+      hover:-translate-y-1 hover:scale-[1.02]
+
       cursor-pointer
-      before:absolute before:inset-0 before:blur-xl before:opacity-40 before:pointer-events-none
+
+      before:absolute before:inset-0 
+      before:bg-gradient-to-br before:from-white/20 before:to-transparent
+      before:opacity-0 hover:before:opacity-100 
+      before:transition before:duration-300
+      before:pointer-events-none
     `;
 
     card.innerHTML = `
-
       <!-- Date -->
-      <h3 class="font-semibold text-sm text-white/80">
+      <h3 class="font-semibold text-xs sm:text-sm text-white/80">
         ${getDateMonth(day.date)}
       </h3>
 
       <!-- Weather Icon -->
-      <div class="flex justify-center text-4xl">
-        <i class="fa-solid ${weatherIcon}  weather-icon"></i>
+      <div class="flex justify-center text-3xl sm:text-4xl">
+        <i class="fa-solid ${weatherIcon} weather-icon drop-shadow-sm"></i>
       </div>
 
       <!-- Temperature -->
-      <div class="flex items-center gap-2 text-lg">
+      <div class="flex items-center gap-2 text-base sm:text-lg">
         <i class="fa-solid fa-temperature-half text-orange-300"></i>
         <span class="font-bold ${tempColor} temp_value">${day.temp}</span>
-        <span class="temp_unit text-white/70">°C</span>
+        <span class="temp_unit text-white/80">°C</span>
       </div>
 
       <!-- Wind -->
-      <div class="flex items-center gap-2 text-sm text-white/70">
+      <div class="flex items-center gap-2 text-xs sm:text-sm text-white/70">
         <i class="fa-solid fa-wind text-cyan-200"></i>
         <span>${day.wind} km/h</span>
       </div>
 
       <!-- Humidity -->
-      <div class="flex items-center gap-2 text-sm text-white/70">
+      <div class="flex items-center gap-2 text-xs sm:text-sm text-white/70">
         <i class="fa-solid fa-droplet text-blue-200"></i>
         <span>${day.humidity}%</span>
       </div>
-
     `;
 
     container.appendChild(card);
   });
 }
 
-// render skeleton cards until data is not recieved.
 function renderSkeletonForecast() {
   const container = document.getElementById("forecast_container");
-
   container.innerHTML = "";
 
   for (let i = 0; i < 5; i++) {
-    // const weatherIcon = getWeatherIcon(day.weather);
-    // const tempColor = getTempColor(day.temp);
-
     const card = document.createElement("div");
-
-    // const weatherBg = getForecastBackground(day.weather);
 
     card.className = `
       relative overflow-hidden
-      rounded-xl p-5 min-h-[170px]
+      rounded-2xl p-5 min-h-[170px]
+
       flex flex-col gap-4
-      text-white shadow-lg
-      bg-gradient-to-br from-sky-500 to-blue-700
+
+      bg-white/10 backdrop-blur-xl border border-white/20
+
+      text-white
+
+      shadow-[0_8px_32px_rgba(0,0,0,0.3)]
       transition-all duration-300
-      hover:scale-105 hover:shadow-2xl
+
       cursor-pointer
-      before:absolute before:inset-0 before:blur-xl before:opacity-40 before:pointer-events-none
     `;
 
     card.innerHTML = `
-
       <!-- Date -->
-      <h3 class="font-semibold text-sm text-white/80">
-       <span class="skeleton h-7 w-40 rounded block"></span>
+      <h3 class="font-semibold text-xs sm:text-sm text-white/80">
+        <span class="skeleton h-5 w-24 rounded block"></span>
       </h3>
 
       <!-- Weather Icon -->
-      <div class="flex justify-center text-4xl">
-        <i class="fa-solid  weather-icon">
-        <span class="skeleton h-7 w-40 rounded block"></span>
-        </i>
+      <div class="flex justify-center text-3xl sm:text-4xl">
+        <span class="skeleton h-8 w-8 rounded-full block"></span>
       </div>
 
       <!-- Temperature -->
-      <div class="flex items-center gap-2 text-lg">
-        <i class="fa-solid fa-temperature-half text-orange-300"></i>
-        <span class="font-bold temp_value">
-        <span class="skeleton h-7 w-40 rounded block"></span>
-        </span>
-        <span class="temp_unit text-white/70">°C</span>
+      <div class="flex items-center gap-2 text-base sm:text-lg">
+        <span class="skeleton h-5 w-16 rounded block"></span>
+      </div>
+
+      <!-- Wind -->
+      <div class="flex items-center gap-2 text-xs sm:text-sm">
+        <span class="skeleton h-4 w-20 rounded block"></span>
       </div>
 
       <!-- Humidity -->
-      <div class="flex items-center gap-2 text-sm text-white/70">
-        <i class="fa-solid fa-droplet text-blue-200"></i>
-        <span>
-        <span class="skeleton h-7 w-40 rounded block"></span>
-        </span>
+      <div class="flex items-center gap-2 text-xs sm:text-sm">
+        <span class="skeleton h-4 w-20 rounded block"></span>
       </div>
-
     `;
 
     container.appendChild(card);
