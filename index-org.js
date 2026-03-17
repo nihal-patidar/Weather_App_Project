@@ -912,7 +912,7 @@ function render5RecentSearches() {
     // row.onclick = () => selectRecent(item);
 
     row.innerHTML = `
-  <button onclick="selectRecent('${item}')" class="max-w-fit capitalize">${item}</button>
+  <button onclick="selectRecent('${item}')" class="w-full text-start capitalize">${item}</button>
 
   <!-- remove button -->
   <button 
